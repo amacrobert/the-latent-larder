@@ -1,0 +1,28 @@
+<header class="masthead {% if page.layout == 'home' %}masthead--home{% endif %}">
+  <div class="wrap">
+
+    <a class="masthead__title" href="{{ '/' | relative_url }}">
+      {%- if page.layout == 'home' -%}
+        <span class="masthead__line">The Latent</span><span class="masthead__line masthead__line--indent">Larder</span>
+      {%- else -%}
+        {{ site.title }}
+      {%- endif -%}
+    </a>
+
+    {%- if page.layout == 'home' %}
+    <p class="masthead__tagline">{{ site.description }}</p>
+    {%- endif %}
+
+    <nav class="nav" aria-label="Main">
+      {%- assign paths = site.header_pages -%}
+      {%- for path in paths -%}
+        {%- assign nav_page = site.pages | where: "path", path | first -%}
+        {%- if nav_page.title -%}
+        <a href="{{ nav_page.url | relative_url }}">{{ nav_page.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+
+  </div>
+</header>

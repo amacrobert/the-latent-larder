@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="wrap">
+
+    <div class="footer__rule" aria-hidden="true">
+      <span></span>
+      {% include illo.html name="wheat" class="footer__mark" %}
+      <span></span>
+    </div>
+
+    <p class="footer__colophon">{{ site.colophon.line }}</p>
+
+    <p class="footer__meta">
+      {{ site.title }}
+      <span class="footer__dot" aria-hidden="true">&middot;</span>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </p>
+
+  </div>
+</footer>

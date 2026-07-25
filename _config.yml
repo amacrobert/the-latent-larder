@@ -5,7 +5,6 @@ description: >-
 url: "https://amacrobert.github.io"
 baseurl: "/the-latent-larder"
 
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -26,17 +25,15 @@ defaults:
     values:
       layout: "recipe"
 
-# Minima renders the nav from site.pages unless told otherwise. Listing it
-# explicitly keeps stray pages out of the header.
+# Pages listed in the site header, in order.
 header_pages:
   - about.md
 
-sass:
-  quiet_deps: true
-  # minima 2.5.2 is an @import-based theme with no @use entry point, so this
-  # warning is unavoidable and not actionable until the theme is updated.
-  silence_deprecations:
-    - import
+# The dry aside about how these recipes get written. Rendered in the footer
+# and, in short form, as a stamp on every recipe.
+colophon:
+  stamp: "machine-written"
+  line: "Every recipe here was written by a machine that has never been hungry. Cooked, we hope, by someone who is."
 
 exclude:
   - Gemfile

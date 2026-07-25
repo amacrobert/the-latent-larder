@@ -2,29 +2,28 @@
 layout: default
 ---
 
-{%- comment -%}
-Overrides minima's own _layouts/home.html, which lists site.posts. This site's
-content lives in the `recipes` collection instead.
-{%- endcomment -%}
+<div class="wrap">
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+  {%- if content != "" %}
+  <div class="intro">{{ content }}</div>
+  {%- endif %}
 
-  {{ content }}
+  <div class="divider" role="presentation">
+    <span></span>
+    {% include illo.html name="thyme" class="divider__mark" %}
+    <span></span>
+  </div>
 
   {%- assign recipes = site.recipes | sort: "date" | reverse -%}
   {%- if recipes.size > 0 -%}
-    <h2 class="recipe-list-heading">{{ page.list_title | default: "Recipes" }}</h2>
-    <ul class="recipe-list">
+    <h2 class="section-heading">{{ page.list_title | default: "Recipes" }}</h2>
+    <ul class="cards">
       {%- for recipe in recipes -%}
-        {% include recipe-card.html recipe=recipe %}
+        {% include recipe-card.html recipe=recipe index=forloop.index0 %}
       {%- endfor -%}
     </ul>
-
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
   {%- else -%}
-    <p>No recipes yet. Add a Markdown file to <code>_recipes/</code> to get started.</p>
+    <p class="empty">Nothing in the larder yet. Add a Markdown file to <code>_recipes/</code>.</p>
   {%- endif -%}
+
 </div>

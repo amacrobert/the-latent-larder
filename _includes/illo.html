@@ -1,0 +1,66 @@
+{%- comment -%}
+  Hand-drawn woodcut-style marks. Usage:
+    {% include illo.html name="thyme" class="divider__mark" %}
+
+  Paths are deliberately irregular — uneven leaf sizes, stems that wobble off
+  true, loops that don't quite close — so they read as drawn rather than
+  generated. Strokes inherit currentColor.
+{%- endcomment -%}
+{%- assign n = include.name -%}
+{%- comment -%}
+  stroke-width is set high because these render small: a 64-unit viewBox drawn
+  at 27px scales 1.6 down to well under a pixel, which greys out to a smudge.
+  Individual sizes tune it further in CSS.
+{%- endcomment -%}
+<svg class="illo {{ include.class }}" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"
+     stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+
+  {%- if n == "thyme" -%}
+    <path d="M7 57C13.5 49.5 19 43 24.5 35.5 30.5 27.5 37 18.5 44.5 9.5"/>
+    <path d="M24.5 35.5c-3.5-1.5-7.5-1-10 1.5 3 2 7 2 10-1.5Z"/>
+    <path d="M27.5 31c1-3.5 4-6 7.5-6.5-.5 4-3.5 6.5-7.5 6.5Z"/>
+    <path d="M31.5 25.5c-3.5-1.2-7-.4-9.5 2 3 1.8 6.8 1.5 9.5-2Z"/>
+    <path d="M35 20c1.3-3.6 4.3-6 8-6.5-.8 4.2-3.8 6.6-8 6.5Z"/>
+    <path d="M38.5 15c-3.3-1.4-6.8-.8-9 1.6 2.8 1.8 6.4 1.4 9-1.6Z"/>
+    <path d="M20 42c-3.7-1-7.3 0-9.5 2.7 3.2 1.5 7 .8 9.5-2.7Z"/>
+    <path d="M44.5 9.5c1-3.4 3.7-5.6 7-6-.4 3.8-3 6-7 6Z"/>
+
+  {%- elsif n == "whisk" -%}
+    {%- comment -%} Short handle, full balloon — the reverse reads as a spoon. {%- endcomment -%}
+    <path d="M30.2 6.5c0-1.5.8-2.5 1.8-2.5s1.8 1 1.8 2.5V27h-3.6Z"/>
+    <path d="M28 27h8"/>
+    <path d="M32 28c-8.5 3.4-13 11.6-11 21.4C22.2 56.6 26.6 60.5 32 60.5"/>
+    <path d="M32 28c8.5 3.4 13 11.6 11 21.4-1.2 7.2-5.6 11.1-11 11.1"/>
+    <path d="M32 28c-4.6 3.8-6.6 11.6-5 21.4.9 5.6 2.7 9.1 5 11.1"/>
+    <path d="M32 28c4.6 3.8 6.6 11.6 5 21.4-.9 5.6-2.7 9.1-5 11.1"/>
+    <path d="M22 47.5c6.8 3.2 13.2 3.2 20 0"/>
+
+  {%- elsif n == "butter" -%}
+    {%- comment -%} A covered butter dish: shallow plate, low lid, small knob. {%- endcomment -%}
+    <path d="M10.5 51.5c-2 0-3.2-1.4-2.6-3.2.5-1.6 2.2-2.5 4.4-2.5h39.4c2.2 0 3.9.9 4.4 2.5.6 1.8-.6 3.2-2.6 3.2Z"/>
+    <path d="M14.5 45.8V33.4c0-2.8 2.2-5 5-5h25c2.8 0 5 2.2 5 5v12.4"/>
+    <path d="M27.8 28.2c0-2.3 1.9-4.2 4.2-4.2s4.2 1.9 4.2 4.2"/>
+    <path d="M21.5 38c6.5-2.2 13-2.2 19.5 0"/>
+
+  {%- elsif n == "wheat" -%}
+    <path d="M32 60V22"/>
+    <path d="M32 44c-5.5-1.5-9-5.5-9-10.5 5 .5 8.5 4 9 10.5Z"/>
+    <path d="M32 44c5.5-1.5 9-5.5 9-10.5-5 .5-8.5 4-9 10.5Z"/>
+    <path d="M32 34c-5-1.6-8.2-5.4-8.2-10 4.7.6 7.8 4 8.2 10Z"/>
+    <path d="M32 34c5-1.6 8.2-5.4 8.2-10-4.7.6-7.8 4-8.2 10Z"/>
+    <path d="M32 24c-4-1.8-6.5-5.4-6.5-9.5 4 .8 6.3 4.2 6.5 9.5Z"/>
+    <path d="M32 24c4-1.8 6.5-5.4 6.5-9.5-4 .8-6.3 4.2-6.5 9.5Z"/>
+    <path d="M32 15c0-4 1-7 3-9-2.5 1-4 4.3-3 9Z"/>
+
+  {%- elsif n == "bowl" -%}
+    <path d="M7 28h50c0 14-11 24-25 24S7 42 7 28Z"/>
+    <path d="M14 34c1.5 7.5 8 13 18 13.5"/>
+    <path d="M44 28c6-9 11.5-14 16.5-15"/>
+    <path d="M57 15c2.5-1.5 3.5-3.5 3-5.5-2.4.4-4 2.2-5 5.5"/>
+
+  {%- elsif n == "spoon" -%}
+    <path d="M30 58c2-11 3-19 3-24"/>
+    <path d="M33 34c-6.5-1.5-10-6.5-10-13.5C23 12 27 6 33 6s10 6 10 14.5c0 7-3.5 12-10 13.5Z"/>
+
+  {%- endif -%}
+</svg>

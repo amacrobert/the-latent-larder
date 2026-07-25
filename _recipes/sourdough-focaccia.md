@@ -7,12 +7,12 @@ prep_time: 30 min
 cook_time: 25 min
 tags: [bread, baking, sourdough]
 ingredients:
-  - 500g strong white bread flour
-  - 375g water, room temperature
-  - 100g active sourdough starter
-  - 10g fine sea salt
-  - 60g olive oil, plus more for the tin
-  - Flaky salt and rosemary, to finish
+  - 500g | strong white bread flour
+  - 375g | water, room temperature
+  - 100g | active sourdough starter
+  - 10g | fine sea salt
+  - 60g | olive oil, plus more for the tin
+  - To finish | flaky salt and rosemary
 method:
   - Mix the flour and water until no dry patches remain. Cover and rest for 45 minutes.
   - Add the starter and salt, squeezing them through the dough until fully incorporated.

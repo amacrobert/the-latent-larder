@@ -49,8 +49,8 @@ prep_time: 30 min
 cook_time: 25 min
 tags: [bread, baking]
 ingredients:
-  - 500g strong white bread flour
-  - 375g water, room temperature
+  - 500g | strong white bread flour
+  - 375g | water, room temperature
 method:
   - Mix the flour and water until no dry patches remain.
   - Cover and rest for 45 minutes.
@@ -64,6 +64,21 @@ Every field except `title` is optional; the layout omits any that are absent.
 Individual `ingredients` and `method` entries may contain inline Markdown
 (`**bold**`, links).
 
+### The `|` in ingredients
+
+A pipe splits an ingredient into **quantity** and **name**. The quantity gets its
+own column, set bold in the accent colour with tabular figures, so amounts line
+up into a rail you can scan mid-cook without reading the words.
+
+```yaml
+- 500g | strong white bread flour     # → "500g" in the rail, name alongside
+- 2 cloves | garlic, thinly sliced
+- A handful | chives, chopped         # works for non-numeric amounts too
+- Flaky salt, to finish               # no pipe → spans the full width
+```
+
+Keep the left side short — the column is about 5rem wide.
+
 Images go in `assets/images/` and are referenced from the project root, e.g.
 `/assets/images/focaccia.jpg` — the layouts add the `baseurl` prefix.
 
@@ -74,14 +89,42 @@ Images go in `assets/images/` and are referenced from the project root, e.g.
 | `index.html` | the home page |
 | `_recipes/` | the content pages |
 | `about.md` | a standalone page; add more via `header_pages` in `_config.yml` |
-| `_layouts/home.html` | overrides minima's home layout to list recipes |
+| `_layouts/default.html` | the HTML skeleton |
+| `_layouts/home.html` | the recipe index |
 | `_layouts/recipe.html` | the recipe page type |
-| `_includes/recipe-card.html` | recipe card used by the home listing |
-| `assets/main.scss` | imports the minima theme and adds recipe styles |
-| `_config.yml` | site metadata, `baseurl`, collection config |
+| `_layouts/page.html` | plain pages like About |
+| `_includes/recipe-card.html` | the index card on the home page |
+| `_includes/illo.html` | the hand-drawn marks (`thyme`, `whisk`, `butter`, `wheat`, `bowl`, `spoon`) |
+| `assets/main.scss` | the entire stylesheet |
+| `assets/fonts/` | self-hosted Fraunces + Source Sans 3 |
+| `_config.yml` | site metadata, `baseurl`, collection config, colophon |
 
-Anything not overridden here comes from the
-[minima](https://github.com/jekyll/minima) theme gem.
+There is no theme gem — the layouts and CSS are self-contained, so nothing
+overrides anything and every rule is in `assets/main.scss`.
+
+## Design notes
+
+Warm neutrals throughout, one burnt-orange accent, no stark white and no grey.
+Colours are CSS custom properties at the top of `assets/main.scss`; changing
+`--paper`, `--ink`, and `--accent` re-skins the whole site.
+
+- **Type** — [Fraunces](https://fonts.google.com/specimen/Fraunces) for headings
+  (its `SOFT` and `WONK` axes give the slightly-imperfect letterpress feel) and
+  [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3) for body.
+  Both are self-hosted variable fonts: no CDN request, no external dependency.
+- **Illustrations** — hand-authored SVG paths in `_includes/illo.html`, drawn
+  with deliberate irregularity. They carry a high `stroke-width` because a
+  64-unit viewBox rendered at ~28px scales a thin stroke below one pixel and
+  turns it into a smudge.
+- **Dark mode** — a warm "lamplight" variant (espresso and cream), not a grey
+  inversion. Both themes are checked at WCAG AA; `--ink-faint` in particular is
+  set to the darkest value that clears 4.5:1 on both `--paper` and `--card`,
+  since it is used on small text.
+- **Print** — recipes print without nav, footer, or grain, with ingredients and
+  method side by side and steps kept off page breaks.
+
+To adjust the machine-written aside, edit `colophon.stamp` and `colophon.line`
+in `_config.yml`.
 
 ## Deployment
 

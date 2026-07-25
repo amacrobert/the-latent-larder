@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  {%- include head.html -%}
+</head>
+<body class="{{ page.body_class }}">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {%- comment -%}
+  Paper grain. A fixed overlay rather than a background-image so it doesn't
+  scroll with content and doesn't tile visibly on long recipe pages.
+  {%- endcomment -%}
+  <div class="grain" aria-hidden="true"></div>
+
+  {%- include header.html -%}
+
+  <main id="main" class="main">
+    {{ content }}
+  </main>
+
+  {%- include footer.html -%}
+
+</body>
+</html>
