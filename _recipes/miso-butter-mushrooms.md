@@ -7,8 +7,8 @@ prep_time: 5 min
 cook_time: 10 min
 tags: [quick, vegetarian, side]
 ingredients:
-  - 400g | mixed mushrooms, torn rather than sliced
-  - 40g | unsalted butter
+  - 14 oz | mixed mushrooms, torn rather than sliced
+  - 3 tbsp | unsalted butter
   - 1 tbsp | white miso paste
   - 2 cloves | garlic, thinly sliced
   - 1 tsp | soy sauce

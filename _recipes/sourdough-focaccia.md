@@ -7,11 +7,11 @@ prep_time: 30 min
 cook_time: 25 min
 tags: [bread, baking, sourdough]
 ingredients:
-  - 500g | strong white bread flour
-  - 375g | water, room temperature
-  - 100g | active sourdough starter
-  - 10g | fine sea salt
-  - 60g | olive oil, plus more for the tin
+  - 3¾ cups | strong white bread flour
+  - 1½ cups | water, room temperature
+  - ½ cup | active sourdough starter
+  - 1½ tsp | fine sea salt
+  - ¼ cup | olive oil, plus more for the tin
   - To finish | flaky salt and rosemary
 method:
   - Mix the flour and water until no dry patches remain. Cover and rest for 45 minutes.
@@ -20,7 +20,7 @@ method:
   - Cover and leave until roughly doubled — 4 to 6 hours at room temperature.
   - Oil a 9x13in tin generously. Tip the dough in, fold it into a rough parcel, and turn it seam-side down.
   - Rest for 2 hours, until the dough relaxes to fill the tin.
-  - Heat the oven to 230°C. Dimple the dough all over with oiled fingertips, then scatter with flaky salt and rosemary.
+  - Heat the oven to 450°F. Dimple the dough all over with oiled fingertips, then scatter with flaky salt and rosemary.
   - Bake for 25 minutes until deep gold. Lift it out of the tin immediately so the base stays crisp.
 ---
 

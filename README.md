@@ -49,8 +49,8 @@ prep_time: 30 min
 cook_time: 25 min
 tags: [bread, baking]
 ingredients:
-  - 500g | strong white bread flour
-  - 375g | water, room temperature
+  - 3¾ cups | strong white bread flour
+  - 1½ cups | water, room temperature
 method:
   - Mix the flour and water until no dry patches remain.
   - Cover and rest for 45 minutes.
@@ -71,13 +71,20 @@ own column, set bold in the accent colour with tabular figures, so amounts line
 up into a rail you can scan mid-cook without reading the words.
 
 ```yaml
-- 500g | strong white bread flour     # → "500g" in the rail, name alongside
+- 3¾ cups | strong white bread flour  # → "3¾ cups" in the rail, name alongside
 - 2 cloves | garlic, thinly sliced
-- A handful | chives, chopped         # works for non-numeric amounts too
+- A handful | chives, chopped         # works for loose amounts too
 - Flaky salt, to finish               # no pipe → spans the full width
 ```
 
 Keep the left side short — the column is about 5rem wide.
+
+Measurements are imperial (cups, oz, tsp, tbsp), with loose amounts where a
+precise one would read oddly: `2 cloves`, `½ lemon`, `A handful`, `4 slices`.
+
+Use only the fractions `½`, `¼`, and `¾`. They live in Latin-1, which the
+self-hosted font subsets cover; `⅓` and `⅔` sit outside the declared
+`unicode-range` and would silently fall back to a system font mid-word.
 
 Images go in `assets/images/` and are referenced from the project root, e.g.
 `/assets/images/focaccia.jpg` — the layouts add the `baseurl` prefix.
