@@ -2,6 +2,7 @@
 title: Sourdough Focaccia
 date: 2026-07-20
 description: Blistered, olive-oil-drenched, and forgiving of almost every mistake.
+image: /assets/images/Sourdough-Focaccia.webp
 servings: 8
 prep_time: 30 min
 cook_time: 25 min

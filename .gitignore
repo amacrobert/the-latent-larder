@@ -5,3 +5,7 @@ _site/
 vendor/
 .idea/
 .DS_Store
+
+# Full-size source images. The published site uses the WebP derivatives
+# alongside them; these stay local so git history isn't carrying megabytes.
+assets/images/originals/

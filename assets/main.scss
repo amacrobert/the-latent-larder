@@ -366,7 +366,10 @@ h1, h2, h3, h4 {
 }
 
 .card__link {
-  display: block;
+  /* Column flex so the slack in a short card can be pushed to one place
+     rather than trailing off the bottom. */
+  display: flex;
+  flex-direction: column;
   position: relative;
   padding: 1.6rem 1.6rem 1.5rem 2.6rem;
   color: inherit;
@@ -409,6 +412,36 @@ h1, h2, h3, h4 {
   color: var(--ink-faint);
 }
 
+/* A snapshot taped into the lower half of the card. `margin-top: auto` takes
+   up whatever slack the grid row hands this card, so the photo sits on the
+   card's lower area instead of floating directly under the meta line. */
+.card__photo {
+  display: block;
+  margin-top: auto;
+  padding-top: 1.2rem;
+  transform: rotate(-0.8deg);
+  transform-origin: 50% 100%;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  img {
+    display: block;
+    width: 100%;
+    /* Fixed ratio regardless of the source file, so a portrait photo can't
+       stretch one card taller than the rest of its row, and nothing shifts
+       as images load. */
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--clay-deep);
+    border-radius: var(--r-sm);
+    box-shadow: var(--shadow-1);
+  }
+}
+
+/* Straighten as the card lifts — the two rotations resolving together is
+   what sells it as a loose photo rather than a printed panel. */
+.card:hover .card__photo,
+.card:focus-within .card__photo { transform: rotate(0deg); }
+
 .card__go {
   display: inline-block;
   margin-top: 1.1rem;
@@ -425,6 +458,11 @@ h1, h2, h3, h4 {
   }
 }
 .card:hover .card__go::after { transform: translateX(4px); }
+
+/* With no photo there is nothing to absorb the row's spare height, so the
+   call to action takes it and pins to the bottom. The gap above it reads as
+   blank ruling on the card, and the CTAs stay aligned across the row. */
+.card:not(.card--has-photo) .card__go { margin-top: auto; }
 
 .empty { color: var(--ink-soft); }
 

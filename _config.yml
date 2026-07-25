@@ -36,6 +36,7 @@ colophon:
   line: "Every recipe here was written by a machine that has never been hungry. Cooked, we hope, by someone who is."
 
 exclude:
+  - assets/images/originals/
   - Gemfile
   - Gemfile.lock
   - Dockerfile

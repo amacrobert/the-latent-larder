@@ -86,8 +86,27 @@ Use only the fractions `½`, `¼`, and `¾`. They live in Latin-1, which the
 self-hosted font subsets cover; `⅓` and `⅔` sit outside the declared
 `unicode-range` and would silently fall back to a system font mid-word.
 
-Images go in `assets/images/` and are referenced from the project root, e.g.
-`/assets/images/focaccia.jpg` — the layouts add the `baseurl` prefix.
+### Images
+
+The optional `image:` field is used in two places: as the hero on the recipe
+page, and as a snapshot on the recipe's card on the home page. A recipe without
+one still looks right — the card is simply blank ruling below the text, and
+titles stay aligned across a row that mixes the two.
+
+Put the web-ready file in `assets/images/` and reference it from the project
+root, e.g. `/assets/images/focaccia.webp`; the layouts add the `baseurl`.
+
+Keep full-size originals in `assets/images/originals/`, which is gitignored and
+excluded from the build. To make a web version from one:
+
+```bash
+cwebp -q 82 -resize 1400 0 -metadata none \
+  assets/images/originals/My-Recipe.png -o assets/images/My-Recipe.webp
+```
+
+1400px covers the hero at 2x on the widest layout. It matters more than it
+looks: the source PNGs are ~2.8 MB each, which would make the home page 5.6 MB;
+as WebP they are ~230 KB and the page is 0.61 MB.
 
 ## Layout of the repo
 

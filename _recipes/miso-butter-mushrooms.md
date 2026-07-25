@@ -2,6 +2,7 @@
 title: Miso Butter Mushrooms
 date: 2026-07-24
 description: A ten-minute side that behaves like a main course.
+image: /assets/images/Miso-Butter-Mushrooms.webp
 servings: 2
 prep_time: 5 min
 cook_time: 10 min

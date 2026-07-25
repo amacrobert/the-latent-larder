@@ -2,13 +2,18 @@
   An index card, not a web card: ruled lines, a red margin rule down the left,
   and a slight rotation that alternates so a grid of them looks stacked by hand
   rather than laid out on a grid. Usage:
-    {% include recipe-card.html recipe=r index=forloop.index0 %}
+    {% include recipe-card.html recipe=some_recipe index=forloop.index0 %}
+
+  The photo sits *below* the text rather than above it. That way every card
+  starts with its title at the same height, so a row mixing cards with and
+  without photos still lines up — and on a card that has one, the photo fills
+  space that would otherwise be blank ruling.
 {%- endcomment -%}
 {%- assign recipe = include.recipe -%}
 {%- assign date_format = site.date_format | default: "%B %-d, %Y" -%}
 {%- assign tilt = include.index | modulo: 3 -%}
 
-<li class="card card--tilt{{ tilt }}" style="--stagger: {{ include.index }}">
+<li class="card card--tilt{{ tilt }}{% if recipe.image %} card--has-photo{% endif %}" style="--stagger: {{ include.index }}">
   <a class="card__link" href="{{ recipe.url | relative_url }}">
 
     <span class="card__rule" aria-hidden="true"></span>
@@ -24,6 +29,16 @@
       {%- if recipe.prep_time %}<span>{{ recipe.prep_time }} prep</span>{% endif -%}
       {%- if recipe.cook_time %}<span>{{ recipe.cook_time }} cook</span>{% endif -%}
     </p>
+
+    {%- if recipe.image %}
+    {%- comment -%}
+      alt="" on purpose: the anchor already carries the recipe title, so a
+      described thumbnail just makes a screen reader say the name twice.
+    {%- endcomment -%}
+    <span class="card__photo">
+      <img src="{{ recipe.image | relative_url }}" alt="" loading="lazy" decoding="async">
+    </span>
+    {%- endif %}
 
     <span class="card__go">Read the recipe</span>
   </a>
