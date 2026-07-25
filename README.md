@@ -116,10 +116,12 @@ Colours are CSS custom properties at the top of `assets/main.scss`; changing
   with deliberate irregularity. They carry a high `stroke-width` because a
   64-unit viewBox rendered at ~28px scales a thin stroke below one pixel and
   turns it into a smudge.
-- **Dark mode** — a warm "lamplight" variant (espresso and cream), not a grey
-  inversion. Both themes are checked at WCAG AA; `--ink-faint` in particular is
-  set to the darkest value that clears 4.5:1 on both `--paper` and `--card`,
-  since it is used on small text.
+- **Light only** — the site is meant to look like paper, so there is no dark
+  variant and `prefers-color-scheme` is not consulted. `:root` declares
+  `color-scheme: light` so a visitor whose OS is dark still gets light
+  scrollbars, form controls, and pre-paint canvas. Contrast is checked at
+  WCAG AA; `--ink-faint` in particular is the darkest value that clears 4.5:1
+  on both `--paper` and `--card`, since it is used on small text.
 - **Print** — recipes print without nav, footer, or grain, with ingredients and
   method side by side and steps kept off page breaks.
 
