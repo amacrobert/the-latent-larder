@@ -1,0 +1,82 @@
+---
+layout: default
+---
+
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+
+<article class="post recipe" itemscope itemtype="https://schema.org/Recipe">
+
+  <header class="post-header">
+    <h1 class="post-title recipe-title" itemprop="name">{{ page.title | escape }}</h1>
+
+    {%- if page.description %}
+    <p class="recipe-description" itemprop="description">{{ page.description | escape }}</p>
+    {%- endif %}
+
+    <ul class="recipe-meta">
+      {%- if page.date %}
+      <li><span class="recipe-meta__label">Published</span>
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: date_format }}</time>
+      </li>
+      {%- endif %}
+      {%- if page.servings %}
+      <li><span class="recipe-meta__label">Serves</span>
+        <span itemprop="recipeYield">{{ page.servings }}</span>
+      </li>
+      {%- endif %}
+      {%- if page.prep_time %}
+      <li><span class="recipe-meta__label">Prep</span>{{ page.prep_time }}</li>
+      {%- endif %}
+      {%- if page.cook_time %}
+      <li><span class="recipe-meta__label">Cook</span>{{ page.cook_time }}</li>
+      {%- endif %}
+    </ul>
+  </header>
+
+  {%- if page.image %}
+  <img class="recipe-image" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" itemprop="image">
+  {%- endif %}
+
+  <div class="recipe-columns">
+    {%- if page.ingredients %}
+    <section class="recipe-ingredients">
+      <h2>Ingredients</h2>
+      <ul>
+        {%- for ingredient in page.ingredients %}
+        <li itemprop="recipeIngredient">{{ ingredient | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if page.method %}
+    <section class="recipe-method">
+      <h2>Method</h2>
+      <ol>
+        {%- for step in page.method %}
+        <li itemprop="recipeInstructions">{{ step | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>
+        {%- endfor %}
+      </ol>
+    </section>
+    {%- endif %}
+  </div>
+
+  {%- assign body = content | strip %}
+  {%- if body != "" %}
+  <div class="post-content recipe-notes">
+    <h2>Notes</h2>
+    {{ content }}
+  </div>
+  {%- endif %}
+
+  {%- if page.tags and page.tags.size > 0 %}
+  <ul class="recipe-tags">
+    {%- for tag in page.tags %}
+    <li>{{ tag }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  <p class="recipe-back"><a href="{{ "/" | relative_url }}">&larr; All recipes</a></p>
+
+</article>

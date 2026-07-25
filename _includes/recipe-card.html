@@ -1,0 +1,30 @@
+{%- comment -%}
+  Usage: {% include recipe-card.html recipe=some_recipe %}
+{%- endcomment -%}
+{%- assign recipe = include.recipe -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+
+<li class="recipe-card">
+  {%- if recipe.image %}
+  <a class="recipe-card__thumb" href="{{ recipe.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ recipe.image | relative_url }}" alt="">
+  </a>
+  {%- endif %}
+
+  <div class="recipe-card__body">
+    <h3 class="recipe-card__title">
+      <a class="post-link" href="{{ recipe.url | relative_url }}">{{ recipe.title | escape }}</a>
+    </h3>
+
+    {%- if recipe.description %}
+    <p class="recipe-card__description">{{ recipe.description | escape }}</p>
+    {%- endif %}
+
+    <p class="recipe-card__meta post-meta">
+      {%- if recipe.date %}<span>{{ recipe.date | date: date_format }}</span>{% endif -%}
+      {%- if recipe.servings %}<span>Serves {{ recipe.servings }}</span>{% endif -%}
+      {%- if recipe.prep_time %}<span>{{ recipe.prep_time }} prep</span>{% endif -%}
+      {%- if recipe.cook_time %}<span>{{ recipe.cook_time }} cook</span>{% endif -%}
+    </p>
+  </div>
+</li>

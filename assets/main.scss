@@ -1,0 +1,174 @@
+---
+# Front matter (even empty) is required for Jekyll to process this as Sass.
+---
+
+@import "minima";
+
+// Multiplication avoids the deprecated `/` division operator in Dart Sass.
+$half-spacing: $spacing-unit * 0.5;
+
+/* ---------- Home page ---------- */
+
+.home-intro {
+  font-size: 1.05rem;
+  color: $grey-color-dark;
+  max-width: 34em;
+}
+
+.recipe-list-heading {
+  margin-top: $spacing-unit;
+}
+
+.recipe-list {
+  list-style: none;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: $spacing-unit;
+}
+
+.recipe-card {
+  border: 1px solid $grey-color-light;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__thumb img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  &__body {
+    padding: $half-spacing;
+  }
+
+  &__title {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+  }
+
+  &__description {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    color: $grey-color-dark;
+  }
+
+  &__meta {
+    margin: 0;
+    font-size: 0.8rem;
+
+    span + span::before {
+      content: "·";
+      margin: 0 6px;
+    }
+  }
+}
+
+/* ---------- Recipe page ---------- */
+
+.recipe-description {
+  font-size: 1.1rem;
+  color: $grey-color-dark;
+  margin-bottom: $half-spacing;
+}
+
+.recipe-meta {
+  list-style: none;
+  margin: 0 0 $spacing-unit;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $half-spacing;
+  font-size: 0.9rem;
+
+  &__label {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.7rem;
+    color: $grey-color;
+  }
+}
+
+.recipe-image {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: $spacing-unit;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: $spacing-unit;
+  align-items: start;
+
+  h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+  }
+
+  @include media-query($on-palm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.recipe-ingredients ul {
+  list-style: none;
+  margin-left: 0;
+
+  li {
+    padding: 4px 0;
+    border-bottom: 1px solid $grey-color-light;
+  }
+}
+
+.recipe-method ol li {
+  margin-bottom: 10px;
+}
+
+.recipe-notes {
+  margin-top: $spacing-unit;
+  padding-top: $half-spacing;
+  border-top: 1px solid $grey-color-light;
+}
+
+.recipe-tags {
+  list-style: none;
+  margin: $spacing-unit 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  li {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border: 1px solid $grey-color-light;
+    border-radius: 999px;
+    color: $grey-color-dark;
+  }
+}
+
+.recipe-back {
+  margin-top: $spacing-unit;
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  .site-header,
+  .site-footer,
+  .recipe-back,
+  .recipe-tags {
+    display: none;
+  }
+
+  .recipe-columns {
+    grid-template-columns: 1fr 2fr;
+  }
+}

@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+{%- comment -%}
+Overrides minima's own _layouts/home.html, which lists site.posts. This site's
+content lives in the `recipes` collection instead.
+{%- endcomment -%}
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- assign recipes = site.recipes | sort: "date" | reverse -%}
+  {%- if recipes.size > 0 -%}
+    <h2 class="recipe-list-heading">{{ page.list_title | default: "Recipes" }}</h2>
+    <ul class="recipe-list">
+      {%- for recipe in recipes -%}
+        {% include recipe-card.html recipe=recipe %}
+      {%- endfor -%}
+    </ul>
+
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- else -%}
+    <p>No recipes yet. Add a Markdown file to <code>_recipes/</code> to get started.</p>
+  {%- endif -%}
+</div>

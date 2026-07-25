@@ -1,0 +1,7 @@
+.git/
+.idea/
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+vendor/

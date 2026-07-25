@@ -1,0 +1,52 @@
+title: The Latent Larder
+email:
+description: >-
+  Recipes from the latent space — cooking notes, ingredients, and method.
+url: "https://amacrobert.github.io"
+baseurl: "/the-latent-larder"
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Content pages live here. `output: true` is what actually generates a page
+# per file; without it the collection is readable but never rendered.
+collections:
+  recipes:
+    output: true
+    permalink: /recipes/:path/
+
+# So a recipe file never has to declare `layout:` itself.
+defaults:
+  - scope:
+      path: ""
+      type: "recipes"
+    values:
+      layout: "recipe"
+
+# Minima renders the nav from site.pages unless told otherwise. Listing it
+# explicitly keeps stray pages out of the header.
+header_pages:
+  - about.md
+
+sass:
+  quiet_deps: true
+  # minima 2.5.2 is an @import-based theme with no @use entry point, so this
+  # warning is unavoidable and not actionable until the theme is updated.
+  silence_deprecations:
+    - import
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - Dockerfile
+  - docker-compose.yml
+  - .dockerignore
+  - README.md
+  - vendor/
+  - .github/
+  - .idea/
+  - .sass-cache/
+  - .jekyll-cache/
