@@ -414,14 +414,18 @@ h1, h2, h3, h4 {
 
 /* A snapshot taped into the lower half of the card. `margin-top: auto` takes
    up whatever slack the grid row hands this card, so the photo sits on the
-   card's lower area instead of floating directly under the meta line. */
+   card's lower area instead of floating directly under the meta line.
+
+   No transform of its own, deliberately. The card's rotate() already applies
+   to its whole subtree, so any rotation here *stacks* on the card's tilt —
+   and on the +0.7deg cards a -0.8deg counter-rotation cancelled it almost
+   exactly, leaving the photo upright inside a tilted card with nothing to
+   straighten on hover. The photo is part of the card; it tilts and lifts
+   with it. */
 .card__photo {
   display: block;
   margin-top: auto;
   padding-top: 1.2rem;
-  transform: rotate(-0.8deg);
-  transform-origin: 50% 100%;
-  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.3, 1);
 
   img {
     display: block;
@@ -436,11 +440,6 @@ h1, h2, h3, h4 {
     box-shadow: var(--shadow-1);
   }
 }
-
-/* Straighten as the card lifts — the two rotations resolving together is
-   what sells it as a loose photo rather than a printed panel. */
-.card:hover .card__photo,
-.card:focus-within .card__photo { transform: rotate(0deg); }
 
 .card__go {
   display: inline-block;
