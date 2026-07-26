@@ -15,19 +15,35 @@ set -euo pipefail
 
 env_file="${LARDER_ENV_FILE:-/etc/larder.env}"
 branch="${LARDER_BRANCH:-main}"
-lockfile="${LARDER_LOCK:-/var/lock/larder-nightly.lock}"
 claude_args="${LARDER_CLAUDE_ARGS:---permission-mode auto}"
+
+# Deliberately not /var/lock. That directory is world-writable and sticky, and
+# Ubuntu ships fs.protected_regular=2, which stops one user opening another
+# user's file there for writing — root included. So a single stray `sudo` run
+# would leave a root-owned lockfile that blocks every later run. A lock under
+# $HOME is owned by whoever runs the script, which is the only sane owner.
+lockfile="${LARDER_LOCK:-${HOME:-/tmp}/.cache/larder-nightly.lock}"
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 log()  { printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"; }
 die()  { log "ERROR: $*"; exit 1; }
 
+# This must run as the user who owns the Claude credentials in ~/.claude and the
+# ssh key that can push. Under sudo, none of those are root's, so the run would
+# get several steps in and then fail — better to say so immediately.
+if [[ "$(id -u)" -eq 0 && "${LARDER_ALLOW_ROOT:-}" != "1" ]]; then
+  die "don't run this with sudo. Run it as the user that owns ~/.claude and the
+     push key. If the env file isn't readable, fix that instead:
+       sudo chown root:\$USER $env_file && sudo chmod 640 $env_file"
+fi
+
 # Hold an exclusive lock for the life of the script by keeping fd 9 open on it.
 # -n means a run still going from last night makes this one bow out rather than
 # queue up behind it. The lock releases automatically when the process ends,
 # including on a crash, so there is no stale lockfile to clean up.
 if command -v flock >/dev/null; then
+  mkdir -p "$(dirname "$lockfile")" || die "cannot create $(dirname "$lockfile")"
   exec 9>"$lockfile" || die "cannot open lock $lockfile"
   flock -n 9 || { log "another run holds $lockfile; exiting"; exit 0; }
 else
@@ -47,8 +63,14 @@ if [[ -r "$env_file" ]]; then
   # generator without this script ever naming or echoing its value.
   set -a; . "$env_file"; set +a
   log "loaded $env_file"
+elif [[ -e "$env_file" ]]; then
+  # Present but unreadable. Grant read access rather than escalating the whole
+  # run to root — see the id check above for why sudo is a dead end here.
+  die "$env_file exists but $(id -un) cannot read it. Grant access with:
+       sudo chown root:$(id -gn) $env_file && sudo chmod 640 $env_file"
 else
-  die "cannot read $env_file"
+  die "$env_file does not exist. Create it with the key in it, or point
+     LARDER_ENV_FILE at another file."
 fi
 
 [[ -n "${OPENAI_API_KEY:-}" ]] || die "OPENAI_API_KEY not set by $env_file"
