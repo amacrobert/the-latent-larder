@@ -1,7 +1,7 @@
 ---
 description: Generate and attach photos for recipes that don't have one yet
 argument-hint: [optional recipe slug, e.g. "slow-lamb-shoulder-with-anchovy" — omit to do all of them]
-allowed-tools: Bash(./bin/recipes-without-images), Bash(cwebp:*), Bash(ls:*), Bash(mv:*), Bash(file:*), Bash(sips:*), Read, Edit, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__find
+allowed-tools: Bash(./bin/recipes-without-images), Bash(./bin/generate-recipe-image:*), Bash(cwebp:*), Bash(ls:*), Bash(file:*), Read, Edit
 ---
 
 # Shoot the missing recipe photos
@@ -17,10 +17,13 @@ The user's steer, if they gave one: **$ARGUMENTS**
 If they named a recipe, do only that one — but still confirm it appears in the
 list above. If it doesn't, say so and stop; it already has a photo. If they
 gave no steer, work through every recipe in the list, **one at a time, start to
-finish**, before moving to the next. Don't batch up prompts or downloads across
-recipes; a half-finished recipe is much harder to untangle than a queue.
+finish**, before moving to the next. Don't batch up prompts or generations
+across recipes; a half-finished recipe is much harder to untangle than a queue.
 
 If the list is empty, say so and stop.
+
+Generating costs money, so check `OPENAI_API_KEY` is set before writing a single
+prompt — failing on the first recipe is better than failing on the fourth.
 
 For each recipe, the loop is: write the prompt → generate the image → bring the
 file into the repo → point the recipe at it.
@@ -57,54 +60,59 @@ Recipe:
 {{RECIPE}}
 ````
 
-## Step 2 — Generate the image in ChatGPT
+## Step 2 — Generate the image
 
-Send **only the image prompt** from step 1 — not the instructions that produced
-it, not the recipe.
-
-1. Call `tabs_context_mcp` first. Never reuse a tab id from an earlier session.
-2. Open a new tab on <https://chatgpt.com/>. If it lands on a logged-out page,
-   stop and ask the user to sign in — don't try to authenticate.
-3. Type the image prompt into the composer and submit it. Prefix it with
-   `Generate an image:` so ChatGPT reaches for the image tool instead of
-   discussing the prompt.
-4. Image generation takes a while. Screenshot every 15–20 seconds until the
-   image is fully rendered. Don't re-submit because it looks slow — a duplicate
-   generation costs the user real money.
-5. Hover the finished image and click its download button. ChatGPT saves to
-   `~/Downloads`.
-
-Never click anything that could raise a browser dialog. If the page won't
-cooperate after two or three attempts, stop and tell the user what you tried
-rather than clicking around.
-
-## Step 3 — Bring the file into the repo
-
-Find what just landed:
-
-```bash
-ls -t ~/Downloads | head -3
-```
-
-Take the newest file only, and sanity-check it's an image of a plausible size
-with `file`. If nothing new arrived, the download didn't happen — go back to
-step 2 rather than guessing at a filename.
+This runs headless, with no browser and no logged-in ChatGPT session. Images
+come from the OpenAI API via `bin/generate-recipe-image`, which needs
+`OPENAI_API_KEY` in the environment. If it isn't set, stop and say so — don't
+go looking for a key in the repo, in shell history, or in any dotfile.
 
 The image name comes from the **recipe's slug**, with each hyphen-separated
 word capitalised: `slow-lamb-shoulder-with-anchovy` →
 `Slow-Lamb-Shoulder-With-Anchovy`. Call that `<Name>`.
 
+Pass the prompt on **stdin via a quoted heredoc**, so nothing in it needs
+escaping:
+
 ```bash
-mv ~/Downloads/<downloaded-file> assets/images/originals/<Name>.png
+./bin/generate-recipe-image <Name> <<'PROMPT'
+<the image prompt from step 1, verbatim>
+PROMPT
+```
+
+Send **only the image prompt** — not the instructions that produced it, and not
+the recipe. Quoting the heredoc delimiter (`<<'PROMPT'`) matters: unquoted, the
+shell would expand backticks and `$` inside the prompt.
+
+The script writes `assets/images/originals/<Name>.png` and prints the path. It
+generates at 1536x1024, the API's landscape size and the only one wide enough to
+reach the site's 1400px without upscaling. Cards centre-crop to 4:3 in CSS, so
+keep the dish centred in the framing you describe.
+
+A run takes up to a couple of minutes. **Never re-run it just because it feels
+slow** — every call bills the user. If it exits non-zero it has already printed
+why and written nothing; fix that cause rather than retrying blindly.
+
+Model, size and quality can be overridden with `OPENAI_IMAGE_MODEL`,
+`OPENAI_IMAGE_SIZE` and `OPENAI_IMAGE_QUALITY` if the user asks. Leave them
+alone otherwise.
+
+## Step 3 — Make the web version
+
+The PNG is already in place from step 2. Convert it, exactly as `README.md`
+documents:
+
+```bash
 cwebp -q 70 -resize 1400 0 -metadata none \
   assets/images/originals/<Name>.png -o assets/images/<Name>.webp
 ```
 
-The original PNG stays in `originals/` at full resolution — that's the archive,
-and it's why `-resize` only ever touches the webp. Every published image in this
-repo is 1400px wide; `-resize 1400 0` keeps the aspect ratio. The webp should
-land somewhere around 200–250KB. If it's wildly bigger, nudge `-q` down; if it's
-tiny, the source was probably low-res and worth regenerating.
+The original PNG stays in `originals/` at full resolution — that's the archive
+(and it's gitignored), which is why `-resize` only ever touches the webp. Every
+published image in this repo is 1400px wide; `-resize 1400 0` keeps the aspect
+ratio. The webp should land somewhere around 200–250KB. If it's wildly bigger,
+nudge `-q` down; if it's tiny, the source was probably low-res and worth
+regenerating.
 
 ## Step 4 — Point the recipe at it
 
@@ -130,8 +138,8 @@ Re-run the finder. The recipes you just did must no longer be listed:
 If one still appears with `(image missing: ...)`, the `image:` path and the file
 on disk disagree — fix the mismatch rather than leaving it.
 
-Then report, per recipe: the dish, the image prompt you wrote, the webp path and
-its dimensions. Mention that `docker compose up` previews the cards at
-<http://localhost:4000/the-latent-larder/>.
+Then report, per recipe: the dish, the image prompt you wrote, and the webp path
+with its dimensions from `file`. On a machine with a browser, `docker compose up`
+previews the cards at <http://localhost:4000/the-latent-larder/>.
 
 Don't build, commit, or push unless the user asks.

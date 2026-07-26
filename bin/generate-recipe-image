@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+#
+# Generate a recipe photo with the OpenAI image API.
+#
+# Usage:  bin/generate-recipe-image <Name> < prompt.txt
+#         bin/generate-recipe-image Slow-Lamb-Shoulder-With-Anchovy <<'PROMPT'
+#         A whole bone-in lamb shoulder ...
+#         PROMPT
+#
+# The prompt is read from stdin, never from an argument, so nothing in it needs
+# shell escaping. The PNG lands in assets/images/originals/<Name>.png at full
+# resolution; converting it for the web is a separate step.
+#
+# Requires OPENAI_API_KEY, curl, jq, and a base64 decoder.
+
+set -euo pipefail
+
+model="${OPENAI_IMAGE_MODEL:-gpt-image-1}"
+# 1536x1024 is the API's landscape option and the only one wide enough to reach
+# the site's 1400px without upscaling. Cards centre-crop it to 4:3 in CSS.
+size="${OPENAI_IMAGE_SIZE:-1536x1024}"
+quality="${OPENAI_IMAGE_QUALITY:-high}"
+api_base="${OPENAI_API_BASE:-https://api.openai.com/v1}"
+
+die() { echo "generate-recipe-image: $*" >&2; exit 1; }
+
+[[ $# -eq 1 ]] || die "usage: $(basename "$0") <Name> < prompt"
+
+name="$1"
+[[ "$name" =~ ^[A-Za-z0-9-]+$ ]] || die "name must be letters, digits and hyphens: $name"
+[[ -n "${OPENAI_API_KEY:-}" ]] || die "OPENAI_API_KEY is not set"
+
+for cmd in curl jq; do
+  command -v "$cmd" >/dev/null || die "$cmd is required but not installed"
+done
+
+# GNU coreutils spells it --decode; BSD/macOS spells it -D.
+if base64 --decode </dev/null >/dev/null 2>&1; then
+  decode() { base64 --decode; }
+else
+  decode() { base64 -D; }
+fi
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+out="$root/assets/images/originals/$name.png"
+mkdir -p "$(dirname "$out")"
+
+prompt="$(cat)"
+[[ -n "${prompt//[[:space:]]/}" ]] || die "no prompt on stdin"
+
+# jq -Rs slurps stdin as one raw string, so quotes and newlines in the prompt
+# survive into valid JSON untouched.
+body="$(printf '%s' "$prompt" | jq -Rs \
+  --arg model "$model" --arg size "$size" --arg quality "$quality" \
+  '{model: $model, prompt: ., size: $size, quality: $quality, n: 1}')"
+
+response="$(mktemp)"
+trap 'rm -f "$response"' EXIT
+
+echo "Generating $name.png ($model, $size, quality=$quality)..." >&2
+
+status="$(curl -sS -X POST "$api_base/images/generations" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  --max-time 600 \
+  -d "$body" \
+  -o "$response" \
+  -w '%{http_code}')"
+
+if [[ "$status" != "200" ]]; then
+  message="$(jq -r '.error.message // empty' "$response" 2>/dev/null || true)"
+  die "OpenAI returned HTTP $status${message:+: $message}"
+fi
+
+# gpt-image-1 always answers with base64; it has no URL response format.
+if ! jq -e '.data[0].b64_json' "$response" >/dev/null 2>&1; then
+  die "no image in the response: $(head -c 400 "$response")"
+fi
+
+jq -r '.data[0].b64_json' "$response" | decode > "$out"
+
+[[ -s "$out" ]] || { rm -f "$out"; die "decoded to an empty file"; }
+case "$(head -c 4 "$out" | od -An -tx1 | tr -d ' \n')" in
+  89504e47) ;;
+  *) rm -f "$out"; die "result is not a PNG" ;;
+esac
+
+echo "$out"
