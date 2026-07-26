@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# Print the recipes in _recipes/ that have no photo yet.
+#
+# A recipe counts as having a photo when its front matter carries an `image:`
+# key pointing at a file that actually exists in the repo. A recipe with an
+# `image:` key that points at a missing file is reported too, since a broken
+# path is just a photo that hasn't arrived.
+
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+recipes="$root/_recipes"
+
+if [[ ! -d "$recipes" ]]; then
+  echo "No _recipes directory at $recipes" >&2
+  exit 1
+fi
+
+missing=0
+
+for recipe in "$recipes"/*.md; do
+  [[ -e "$recipe" ]] || continue
+
+  # Read the front matter only: everything between the opening and closing ---.
+  image="$(awk '
+    NR == 1 && $0 == "---" { in_front = 1; next }
+    in_front && $0 == "---" { exit }
+    in_front && /^image:[[:space:]]*/ {
+      sub(/^image:[[:space:]]*/, "")
+      gsub(/^["\x27]|["\x27]$/, "")
+      print
+      exit
+    }
+  ' "$recipe")"
+
+  if [[ -z "$image" ]]; then
+    echo "${recipe#"$root"/}"
+    missing=$((missing + 1))
+  elif [[ ! -f "$root/${image#/}" ]]; then
+    echo "${recipe#"$root"/} (image missing: $image)"
+    missing=$((missing + 1))
+  fi
+done
+
+if [[ $missing -eq 0 ]]; then
+  echo "Every recipe has a photo." >&2
+fi

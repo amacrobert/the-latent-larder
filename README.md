@@ -100,7 +100,7 @@ Keep full-size originals in `assets/images/originals/`, which is gitignored and
 excluded from the build. To make a web version from one:
 
 ```bash
-cwebp -q 82 -resize 1400 0 -metadata none \
+cwebp -q 70 -resize 1400 0 -metadata none \
   assets/images/originals/My-Recipe.png -o assets/images/My-Recipe.webp
 ```
 
