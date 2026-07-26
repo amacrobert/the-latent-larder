@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+#
+# Draft a new recipe, shoot its photo, and push the result. Built for cron.
+#
+#   0 6 * * *  /srv/the-latent-larder/bin/nightly-recipe >> /var/log/larder.log 2>&1
+#
+# Cron gives a process almost no environment, so everything this needs is
+# either read from LARDER_ENV_FILE or resolved by absolute path below. It runs
+# under flock, so a slow run can never overlap the next one, and it commits
+# with git directly rather than asking Claude to do it.
+#
+# Requires: claude, git, cwebp, curl, jq — and OPENAI_API_KEY in the env file.
+
+set -euo pipefail
+
+env_file="${LARDER_ENV_FILE:-/etc/larder.env}"
+branch="${LARDER_BRANCH:-main}"
+lockfile="${LARDER_LOCK:-/var/lock/larder-nightly.lock}"
+claude_args="${LARDER_CLAUDE_ARGS:---permission-mode auto}"
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+log()  { printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"; }
+die()  { log "ERROR: $*"; exit 1; }
+
+# Hold an exclusive lock for the life of the script by keeping fd 9 open on it.
+# -n means a run still going from last night makes this one bow out rather than
+# queue up behind it. The lock releases automatically when the process ends,
+# including on a crash, so there is no stale lockfile to clean up.
+if command -v flock >/dev/null; then
+  exec 9>"$lockfile" || die "cannot open lock $lockfile"
+  flock -n 9 || { log "another run holds $lockfile; exiting"; exit 0; }
+else
+  log "WARNING: flock not found; running without an overlap guard"
+fi
+
+log "=== nightly recipe run starting in $root ==="
+
+# --- environment ------------------------------------------------------------
+
+# PATH under cron is typically just /usr/bin:/bin. Claude usually lands in one
+# of these; add to LARDER_EXTRA_PATH rather than editing this line.
+export PATH="${LARDER_EXTRA_PATH:-$HOME/.local/bin:/usr/local/bin}:$PATH"
+
+if [[ -r "$env_file" ]]; then
+  # set -a exports everything the file defines, so OPENAI_API_KEY reaches the
+  # generator without this script ever naming or echoing its value.
+  set -a; . "$env_file"; set +a
+  log "loaded $env_file"
+else
+  die "cannot read $env_file"
+fi
+
+[[ -n "${OPENAI_API_KEY:-}" ]] || die "OPENAI_API_KEY not set by $env_file"
+
+for cmd in claude git cwebp curl jq; do
+  command -v "$cmd" >/dev/null || die "$cmd not found on PATH ($PATH)"
+done
+
+cd "$root"
+
+# --- start from a clean, current tree ---------------------------------------
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  die "working tree is dirty; refusing to run. Resolve it and re-run."
+fi
+
+log "fetching origin/$branch"
+git fetch --quiet origin "$branch"
+git checkout --quiet "$branch"
+git merge --quiet --ff-only "origin/$branch" \
+  || die "local $branch has diverged from origin; resolve by hand"
+
+# --- do the work ------------------------------------------------------------
+
+log "drafting a recipe (/new-recipe)"
+claude $claude_args -p "/new-recipe" || die "/new-recipe failed"
+
+log "shooting the photo (/recipe-image-generator)"
+claude $claude_args -p "/recipe-image-generator" || die "/recipe-image-generator failed"
+
+# --- commit and push, with git rather than a prompt -------------------------
+
+if [[ -z "$(git status --porcelain)" ]]; then
+  log "nothing changed; nothing to commit"
+  exit 0
+fi
+
+git add -A
+
+# Name the commit after the recipe that appeared, matching the repo's history
+# ("Add slow lamb shoulder with anchovy" — lowercase after the verb).
+added="$(git diff --cached --name-only --diff-filter=A -- _recipes)"
+added_count="$(printf '%s' "$added" | grep -c . || true)"
+
+case "$added_count" in
+  0) message="Add recipe photos" ;;
+  1) title="$(awk '/^title: /{sub(/^title: /, ""); print; exit}' "$added" \
+              | tr '[:upper:]' '[:lower:]')"
+     message="Add ${title:-a recipe}" ;;
+  *) message="Add new recipes and photos" ;;
+esac
+
+log "committing: $message"
+git -c user.name="${GIT_AUTHOR_NAME:-Latent Larder bot}" \
+    -c user.email="${GIT_AUTHOR_EMAIL:-larder@localhost}" \
+    commit --quiet -m "$message"
+
+log "pushing to origin/$branch"
+git push --quiet origin "$branch" || die "push failed (check the deploy key)"
+
+log "pushed $(git rev-parse --short HEAD) — $message"
+
+# --- report -----------------------------------------------------------------
+
+if ! ./bin/recipes-without-images >/dev/null 2>&1; then
+  log "WARNING: some recipes still have no photo:"
+  ./bin/recipes-without-images || true
+fi
+
+log "=== done ==="
