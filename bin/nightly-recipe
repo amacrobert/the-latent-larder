@@ -123,13 +123,42 @@ case "$added_count" in
   *) message="Add new recipes and photos" ;;
 esac
 
-log "committing: $message"
-git -c user.name="${GIT_AUTHOR_NAME:-Latent Larder bot}" \
-    -c user.email="${GIT_AUTHOR_EMAIL:-larder@localhost}" \
-    commit --quiet -m "$message"
+# The bot's identity, needed by commit and again by the rebase below. Without
+# it a rebase on a machine with no global git config stops to ask who you are.
+git_bot=(git -c "user.name=${GIT_AUTHOR_NAME:-Latent Larder bot}"
+             -c "user.email=${GIT_AUTHOR_EMAIL:-larder@localhost}")
 
-log "pushing to origin/$branch"
-git push --quiet origin "$branch" || die "push failed (check the deploy key)"
+log "committing: $message"
+"${git_bot[@]}" commit --quiet -m "$message"
+
+# The tree was current when this run started, but drafting the recipe and
+# shooting its photo take minutes, and $branch can move in that window — the
+# deploy workflow never commits, but a person or a second machine can. A push
+# that lost that race is a non-fast-forward, not a broken deploy key, and the
+# fix is to replay tonight's commit on top of whatever landed rather than to
+# fail the run and skip a night.
+#
+# Rebase rather than merge: this commit only adds files under _recipes/ and
+# assets/images/, so it replays cleanly onto anything that is not another
+# recipe of the same name, and the history stays a straight line.
+attempts="${LARDER_PUSH_ATTEMPTS:-3}"
+
+for attempt in $(seq 1 "$attempts"); do
+  log "pushing to origin/$branch (attempt $attempt/$attempts)"
+  git push --quiet origin "$branch" && break
+
+  [[ "$attempt" -lt "$attempts" ]] \
+    || die "push still rejected after $attempts attempts; check the deploy key
+     and whether $branch is protected"
+
+  log "push rejected; pulling origin/$branch and replaying on top"
+  git fetch --quiet origin "$branch" || die "fetch failed while retrying the push"
+
+  "${git_bot[@]}" rebase --quiet "origin/$branch" || {
+    "${git_bot[@]}" rebase --abort >/dev/null 2>&1 || true
+    die "cannot replay $message onto origin/$branch; resolve by hand"
+  }
+done
 
 log "pushed $(git rev-parse --short HEAD) — $message"
 

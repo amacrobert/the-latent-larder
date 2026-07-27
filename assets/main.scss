@@ -764,36 +764,61 @@ h1, h2, h3, h4 {
 
 /* --- Breadcrumbs --------------------------------------------------------- */
 
+/* Set in the same tracked small caps as the nav, the stat labels and the tag
+   chips. In normal case at body size it read as a stray sentence above the
+   title rather than as navigation — it was the one piece of furniture on the
+   site not speaking the metadata idiom. */
 .crumbs {
-  margin-bottom: clamp(1.25rem, 3vw, 2rem);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  color: var(--ink-faint);
+  margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.5;
 
   ol {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.2rem 0.6rem;
     margin: 0;
     padding: 0;
   }
 
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* A slash, not the "\203A" chevron. That glyph renders far lighter than the
+     caps beside it and sits off their optical centre, so the trail broke into
+     three loose fragments; a drawn chevron small enough to match is only a few
+     pixels across and turns into a blob. A slash reads as a path, holds its
+     weight against tracked caps, and stays crisp at any size. */
   li + li::before {
-    content: "\203A";
-    margin-right: 0.5rem;
+    content: "/";
+    flex: none;
     color: var(--clay-deep);
+    font-size: 1.05em;
+    letter-spacing: 0;
   }
 
   a {
     color: var(--ink-faint);
     text-decoration: none;
+    transition: color 0.2s ease;
 
-    &:hover { color: var(--accent); text-decoration: underline; }
+    &:hover,
+    &:focus-visible { color: var(--accent); }
   }
 
-  [aria-current="page"] { color: var(--ink-soft); }
+  /* Where you are, carrying slightly more weight than where you have been. */
+  [aria-current="page"] {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
 }
 
 .back {
