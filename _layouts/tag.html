@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="wrap">
+
+  {%- include breadcrumb.html parent_name="Recipes by tag" parent_url="/recipes/tag/" -%}
+
+  <h1 class="page__title">{{ page.title | escape }}</h1>
+
+  <p class="intro">{{ page.recipes.size }} recipe{% if page.recipes.size != 1 %}s{% endif %}
+  tagged &ldquo;{{ page.tag | escape }}&rdquo;.</p>
+
+  <div class="divider" role="presentation">
+    <span></span>
+    {% include illo.html name="thyme" class="divider__mark" %}
+    <span></span>
+  </div>
+
+  <ul class="cards">
+    {%- for recipe in page.recipes -%}
+      {% include recipe-card.html recipe=recipe index=forloop.index0 %}
+    {%- endfor -%}
+  </ul>
+
+  {%- comment -%}
+  Sideways links between tag pages. A crawler arriving on one tag can reach
+  every other in a single hop instead of climbing back to the root each time.
+  {%- endcomment -%}
+  {%- if site.data.recipe_tags.size > 1 %}
+  <nav class="tag-cloud" aria-label="Other tags">
+    <h2 class="tag-cloud__heading">Other tags</h2>
+    <ul class="tags tags--links">
+      {%- for tag in site.data.recipe_tags %}
+      {%- unless tag.slug == page.tag_slug %}
+      <li><a href="{{ tag.url | relative_url }}">{{ tag.name }} <span class="tags__count">{{ tag.count }}</span></a></li>
+      {%- endunless %}
+      {%- endfor %}
+    </ul>
+  </nav>
+  {%- endif %}
+
+  <p class="back"><a href="{{ '/' | relative_url }}">Back to the larder</a></p>
+
+</div>

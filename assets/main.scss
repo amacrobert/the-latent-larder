@@ -235,10 +235,12 @@ h1, h2, h3, h4 {
 
   .wrap { display: block; }
 
+  /* An h1 on the home page, an anchor everywhere else — the margin reset is
+     what keeps the two rendering identically. */
   .masthead__title {
     font-size: clamp(3.25rem, 11.5vw, 7.5rem);
     display: block;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem;
   }
 }
 
@@ -430,6 +432,10 @@ h1, h2, h3, h4 {
   img {
     display: block;
     width: 100%;
+    /* The width/height attributes on the tag map to CSS presentational hints.
+       Without `height: auto` to override the height one, a 1400x934 file would
+       lay out 934px tall and the aspect-ratio below would never apply. */
+    height: auto;
     /* Fixed ratio regardless of the source file, so a portrait photo can't
        stretch one card taller than the rest of its row, and nothing shifts
        as images load. */
@@ -531,6 +537,9 @@ h1, h2, h3, h4 {
 
 .recipe__image {
   width: 100%;
+  /* Lets the width/height attributes reserve the right box before the photo
+     loads without also pinning it to its pixel height at every viewport. */
+  height: auto;
   border-radius: var(--r-lg);
   border: 1px solid var(--clay-deep);
   box-shadow: var(--shadow-1);
@@ -681,11 +690,110 @@ h1, h2, h3, h4 {
     font-size: 0.72rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* The chip outline lives on the li for plain tags and on the anchor for
+     linked ones, so the whole chip is the hit target rather than just the
+     word inside it. */
+  > li {
+    padding: 0.36rem 0.85rem;
+    border: 1px solid var(--clay-deep);
+    border-radius: 999px;
+  }
+}
+
+.tags--links > li {
+  padding: 0;
+  border: 0;
+
+  a {
+    display: inline-block;
     padding: 0.36rem 0.85rem;
     border: 1px solid var(--clay-deep);
     border-radius: 999px;
     color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--accent-deep);
+      border-color: var(--accent);
+      background: var(--accent-tint);
+    }
   }
+}
+
+.tags__count {
+  /* A tabular-ish count, dimmed so it reads as metadata and not as part of
+     the tag name itself. */
+  margin-left: 0.4em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.tags--index {
+  gap: 0.65rem;
+  margin-top: 0;
+
+  a { font-size: 0.8rem; }
+}
+
+/* --- Tag pages ----------------------------------------------------------- */
+
+.tag-cloud {
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+}
+
+.tag-cloud--home {
+  margin: 0 0 clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.tag-cloud__heading {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 600;
+  color: var(--ink-faint);
+  margin: 0 0 0.9rem;
+}
+
+.tag-cloud .tags { margin-top: 0; }
+
+/* --- Breadcrumbs --------------------------------------------------------- */
+
+.crumbs {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+
+  ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  li + li::before {
+    content: "\203A";
+    margin-right: 0.5rem;
+    color: var(--clay-deep);
+  }
+
+  a {
+    color: var(--ink-faint);
+    text-decoration: none;
+
+    &:hover { color: var(--accent); text-decoration: underline; }
+  }
+
+  [aria-current="page"] { color: var(--ink-soft); }
 }
 
 .back {

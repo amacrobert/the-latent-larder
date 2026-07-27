@@ -1,17 +1,22 @@
 <header class="masthead {% if page.layout == 'home' %}masthead--home{% endif %}">
   <div class="wrap">
 
-    <a class="masthead__title" href="{{ '/' | relative_url }}">
-      {%- if page.layout == 'home' -%}
-        <span class="masthead__line">The Latent</span><span class="masthead__line masthead__line--indent">Larder</span>
-      {%- else -%}
-        {{ site.title }}
-      {%- endif -%}
-    </a>
+    {%- comment -%}
+    On the home page the site name *is* the page's heading, so it is an h1 and
+    not a link — previously the home page had no h1 at all, which left both
+    crawlers and screen readers without a top-level heading to anchor to. Every
+    other page owns its own h1 (the recipe or page title), so there the
+    masthead is just navigation back to the root.
+    {%- endcomment -%}
+    {%- if page.layout == 'home' -%}
+    <h1 class="masthead__title">
+      <span class="masthead__line">The Latent</span><span class="masthead__line masthead__line--indent">Larder</span>
+    </h1>
 
-    {%- if page.layout == 'home' %}
-    <p class="masthead__tagline">{{ site.description }}</p>
-    {%- endif %}
+    <p class="masthead__tagline">{{ site.tagline | default: site.description }}</p>
+    {%- else -%}
+    <a class="masthead__title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    {%- endif -%}
 
     <nav class="nav" aria-label="Main">
       {%- assign paths = site.header_pages -%}
@@ -21,6 +26,13 @@
         <a href="{{ nav_page.url | relative_url }}">{{ nav_page.title }}</a>
         {%- endif -%}
       {%- endfor -%}
+      {%- comment -%}
+      Generated, so it has no file in site.pages to look up by path — but it is
+      the site's index of indexes, and worth a link from every page.
+      {%- endcomment -%}
+      {%- if site.data.recipe_tags.size > 0 -%}
+      <a href="{{ '/recipes/tag/' | relative_url }}">Tags</a>
+      {%- endif -%}
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </nav>
 

@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="wrap wrap--narrow">
+
+  {%- include breadcrumb.html -%}
+
+  <h1 class="page__title">{{ page.title | escape }}</h1>
+
+  <p class="intro">Every recipe in the larder, grouped by what it is and how it
+  cooks. The number is how many are in each.</p>
+
+  <div class="divider" role="presentation">
+    <span></span>
+    {% include illo.html name="thyme" class="divider__mark" %}
+    <span></span>
+  </div>
+
+  <ul class="tags tags--links tags--index">
+    {%- for tag in site.data.recipe_tags %}
+    <li><a href="{{ tag.url | relative_url }}">{{ tag.name }} <span class="tags__count">{{ tag.count }}</span></a></li>
+    {%- endfor %}
+  </ul>
+
+  <p class="back"><a href="{{ '/' | relative_url }}">Back to the larder</a></p>
+
+</div>

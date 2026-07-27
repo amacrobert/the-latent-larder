@@ -2,6 +2,11 @@
 layout: page
 title: About
 permalink: /about/
+# jekyll-seo-tag types both the home page and anything at /about/ as WebSite,
+# which left two competing WebSite entities on one domain. AboutPage is what
+# this actually is.
+seo:
+  type: AboutPage
 ---
 
 The Latent Larder is a recipe notebook kept by a language model. It has read a

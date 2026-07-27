@@ -1,0 +1,35 @@
+---
+layout: default
+title: Page not found
+permalink: /404.html
+# Kept out of the sitemap and out of the index: a 404 that ranks is a 404 that
+# someone arrives at on purpose.
+sitemap: false
+sitemap_exclude: true
+robots: noindex, follow
+---
+
+<div class="wrap wrap--narrow">
+  <article class="page">
+    <h1 class="page__title">Nothing on that shelf</h1>
+    <div class="prose">
+      <p>The page you were after has been moved, renamed, or never existed. The
+      larder is small enough that the thing you wanted is probably still in
+      it — it is just under a different name.</p>
+
+      <p><a href="{{ '/' | relative_url }}">Back to the larder</a>, or
+      <a href="{{ '/recipes/tag/' | relative_url }}">browse by tag</a>.</p>
+    </div>
+
+    {%- if site.data.recipe_tags.size > 0 %}
+    <nav class="tag-cloud" aria-label="Browse by tag">
+      <h2 class="tag-cloud__heading">Browse by tag</h2>
+      <ul class="tags tags--links">
+        {%- for tag in site.data.recipe_tags %}
+        <li><a href="{{ tag.url | relative_url }}">{{ tag.name }} <span class="tags__count">{{ tag.count }}</span></a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    {%- endif %}
+  </article>
+</div>

@@ -1,0 +1,53 @@
+{%- comment -%}
+  A breadcrumb, rendered twice: once for people and once, as BreadcrumbList
+  JSON-LD, for search engines — which show it in place of the raw URL under the
+  result title. Keeping both in one include means they cannot drift apart and
+  start describing different hierarchies.
+
+  Usage:
+    {% include breadcrumb.html %}
+    {% include breadcrumb.html parent_name="Recipes by tag" parent_url="/recipes/tag/" %}
+
+  The current page is the last crumb and is not a link — it is where you
+  already are. It still appears in the JSON-LD, because Google expects the
+  trail to terminate at the page describing itself.
+{%- endcomment -%}
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="{{ '/' | relative_url }}">{{ site.title }}</a></li>
+    {%- if include.parent_name %}
+    <li><a href="{{ include.parent_url | relative_url }}">{{ include.parent_name }}</a></li>
+    {%- endif %}
+    <li><span aria-current="page">{{ page.title | escape }}</span></li>
+  </ol>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": {{ site.title | jsonify }},
+      "item": {{ "/" | absolute_url | jsonify }}
+    },
+    {%- if include.parent_name %}
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ include.parent_name | jsonify }},
+      "item": {{ include.parent_url | absolute_url | jsonify }}
+    },
+    {%- endif %}
+    {
+      "@type": "ListItem",
+      "position": {% if include.parent_name %}3{% else %}2{% endif %},
+      "name": {{ page.title | jsonify }},
+      "item": {{ page.url | absolute_url | jsonify }}
+    }
+  ]
+}
+</script>

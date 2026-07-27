@@ -1,9 +1,22 @@
 title: The Latent Larder
 email:
+# The meta description search engines quote under the result. Kept under ~155
+# characters, because past that they truncate it mid-thought.
 description: >-
-  Recipes from the latent space — cooking notes, ingredients, and method.
+  Recipes written to be checked rather than trusted: ingredients in one column,
+  method in the other, and no life story before the flour.
 url: "https://thelatentlarder.com"
 baseurl: ""
+lang: en
+
+# No `author:` here on purpose. jekyll-seo-tag would turn a string into a
+# schema.org Person, and the larder is not one — the recipe schema names it as
+# an Organization instead, which is both true and what a publisher should be.
+
+# The home page <title> is built as "title | tagline". Without a tagline it
+# falls back to the description, which made a ~100-character title that search
+# results cut off. This also stands in as the masthead line.
+tagline: Recipes from the latent space
 
 plugins:
   - jekyll-feed
@@ -24,6 +37,12 @@ defaults:
       type: "recipes"
     values:
       layout: "recipe"
+      # jekyll-seo-tag defaults anything with a `date` to BlogPosting. These
+      # are not blog posts, and leaving it would put a BlogPosting node next to
+      # the Recipe node in `_includes/recipe-schema.html` — two different
+      # claims about what the page is. WebPage is the neutral, true one.
+      seo:
+        type: WebPage
 
 # Pages listed in the site header, in order.
 header_pages:
@@ -37,6 +56,9 @@ colophon:
 
 exclude:
   - assets/images/originals/
+  # Authoring scripts. These were being copied into _site and served, which is
+  # crawlable surface that is not a page.
+  - bin/
   - Gemfile
   - Gemfile.lock
   - Dockerfile

@@ -1,0 +1,112 @@
+{%- comment -%}
+  schema.org/Recipe as JSON-LD — the only reason a recipe site shows up in
+  search with a photo, a time, and a rating slot instead of a blue link.
+
+  This is deliberately JSON-LD and not microdata sprinkled through the layout.
+  Google reads both, but mixing them means two partial descriptions of the same
+  dish competing to be the canonical one, and the markup ends up steering the
+  HTML. Keeping it in one block means the page can be restyled freely and the
+  structured data still says exactly what it meant to.
+
+  Every string goes through `jsonify`, which supplies its own quotes and
+  escapes anything inside — an apostrophe in a title would otherwise end the
+  JSON string early and silently invalidate the whole block.
+{%- endcomment -%}
+
+{%- comment -%} Ingredients: rejoin the "quantity | item" columns the page
+splits apart, since recipeIngredient wants one readable line. §  is the
+separator only because it cannot occur in the source. {%- endcomment -%}
+{%- capture ingredients_joined -%}
+  {%- for ingredient in page.ingredients -%}
+    {%- assign parts = ingredient | split: "|" -%}
+    {%- if parts.size > 1 -%}
+      {{- parts[0] | strip }} {{ parts[1] | strip -}}
+    {%- else -%}
+      {{- ingredient | strip -}}
+    {%- endif -%}
+    {%- unless forloop.last -%}§{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign ingredient_list = ingredients_joined | split: "§" -%}
+
+{%- comment -%} One category, chosen from the tags by how a cook would file the
+dish. Ordered most specific first so "dessert, baking" files under dessert.
+{%- endcomment -%}
+{%- assign category = nil -%}
+{%- if page.tags contains "dessert" -%}{%- assign category = "Dessert" -%}
+{%- elsif page.tags contains "breakfast" -%}{%- assign category = "Breakfast" -%}
+{%- elsif page.tags contains "appetizer" -%}{%- assign category = "Appetizer" -%}
+{%- elsif page.tags contains "dip" -%}{%- assign category = "Appetizer" -%}
+{%- elsif page.tags contains "soup" -%}{%- assign category = "Soup" -%}
+{%- elsif page.tags contains "salad" -%}{%- assign category = "Salad" -%}
+{%- elsif page.tags contains "side" -%}{%- assign category = "Side Dish" -%}
+{%- elsif page.tags contains "bread" -%}{%- assign category = "Bread" -%}
+{%- elsif page.tags contains "main" -%}{%- assign category = "Main Course" -%}
+{%- endif -%}
+
+{%- assign prep_iso = page.prep_time | iso8601_duration -%}
+{%- assign cook_iso = page.cook_time | iso8601_duration -%}
+{%- assign total_iso = page.prep_time | iso8601_total: page.cook_time -%}
+{%- assign page_url = page.url | absolute_url -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "@id": {{ page_url | append: "#recipe" | jsonify }},
+  "name": {{ page.title | jsonify }},
+  "url": {{ page_url | jsonify }},
+  "mainEntityOfPage": {{ page_url | jsonify }},
+  {%- if page.description %}
+  "description": {{ page.description | jsonify }},
+  {%- endif %}
+  {%- if page.image %}
+  "image": [{{ page.image | absolute_url | jsonify }}],
+  {%- endif %}
+  {%- if page.date %}
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  {%- endif %}
+  "author": {
+    "@type": "Organization",
+    "name": {{ site.author | default: site.title | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }}
+  },
+  {%- if prep_iso %}
+  "prepTime": {{ prep_iso | jsonify }},
+  {%- endif %}
+  {%- if cook_iso %}
+  "cookTime": {{ cook_iso | jsonify }},
+  {%- endif %}
+  {%- if total_iso %}
+  "totalTime": {{ total_iso | jsonify }},
+  {%- endif %}
+  {%- if page.servings %}
+  "recipeYield": {{ page.servings | append: " servings" | jsonify }},
+  {%- endif %}
+  {%- if category %}
+  "recipeCategory": {{ category | jsonify }},
+  {%- endif %}
+  {%- if page.tags and page.tags.size > 0 %}
+  "keywords": {{ page.tags | join: ", " | jsonify }},
+  {%- endif %}
+  {%- if ingredient_list.size > 0 %}
+  "recipeIngredient": {{ ingredient_list | jsonify }},
+  {%- endif %}
+  "recipeInstructions": [
+    {%- for step in page.method %}
+    {
+      "@type": "HowToStep",
+      "position": {{ forloop.index }},
+      "url": {{ page_url | append: "#step-" | append: forloop.index | jsonify }},
+      "text": {{ step | strip | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>

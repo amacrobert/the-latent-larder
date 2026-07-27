@@ -2,8 +2,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f4ecdd">
 
+{%- comment -%}
+jekyll-seo-tag has no robots directive of its own, so pages that should stay
+out of the index (the 404, for one) declare it in their own front matter.
+{%- endcomment -%}
+{%- if page.robots %}
+<meta name="robots" content="{{ page.robots }}">
+{%- endif %}
+
 {%- seo -%}
 {%- feed_meta -%}
+
+{%- comment -%}
+jekyll-seo-tag describes the *page*; this describes the *dish*. The two sit
+side by side rather than fighting: the collection default pins seo-tag's node
+to WebPage so it stops claiming to be a BlogPosting, and the Recipe below is
+the one search engines read for rich results.
+{%- endcomment -%}
+{%- if page.collection == "recipes" -%}
+  {%- include recipe-schema.html -%}
+{%- endif -%}
 
 {%- comment -%}
 Fonts are self-hosted, so there is no third-party request and no dependency on
@@ -14,6 +32,17 @@ when a page actually needs those glyphs.
 <link rel="preload" href="{{ '/assets/fonts/source-sans-3-normal-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+
+{%- comment -%}
+The ad and analytics scripts below are async, but the browser still cannot
+start them until it has resolved DNS and finished a TLS handshake with hosts it
+has never seen. Warming those connections here overlaps that cost with parsing
+the rest of the page instead of paying it afterwards.
+{%- endcomment -%}
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
 {%- comment -%}
 AdSense site verification. Loaded async so it never blocks rendering.

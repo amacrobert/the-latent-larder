@@ -4,7 +4,7 @@ layout: default
 
 {%- assign date_format = site.date_format | default: "%B %-d, %Y" -%}
 
-<article class="recipe" itemscope itemtype="https://schema.org/Recipe">
+<article class="recipe">
 
   {%- comment -%}
   The head block stays deliberately short: title, one line, the numbers you
@@ -14,23 +14,25 @@ layout: default
   <header class="recipe__head">
     <div class="wrap wrap--narrow">
 
+      {%- include breadcrumb.html -%}
+
       {%- comment -%}
       Text only. Every illustration in the set turns to mush at ~18px, and a
       smudge next to the words undercuts the confidence of the aside.
       {%- endcomment -%}
       <p class="stamp"><span>{{ site.colophon.stamp }}</span></p>
 
-      <h1 class="recipe__title" itemprop="name">{{ page.title | escape }}</h1>
+      <h1 class="recipe__title">{{ page.title | escape }}</h1>
 
       {%- if page.description %}
-      <p class="recipe__standfirst" itemprop="description">{{ page.description | escape }}</p>
+      <p class="recipe__standfirst">{{ page.description | escape }}</p>
       {%- endif %}
 
       <dl class="stats">
         {%- if page.servings %}
         <div class="stats__item">
           <dt>Serves</dt>
-          <dd itemprop="recipeYield">{{ page.servings }}</dd>
+          <dd>{{ page.servings }}</dd>
         </div>
         {%- endif %}
         {%- if page.prep_time %}
@@ -48,7 +50,7 @@ layout: default
         {%- if page.date %}
         <div class="stats__item">
           <dt>Written</dt>
-          <dd><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: date_format }}</time></dd>
+          <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: date_format }}</time></dd>
         </div>
         {%- endif %}
       </dl>
@@ -57,8 +59,21 @@ layout: default
   </header>
 
   {%- if page.image %}
+  {%- comment -%}
+    This is the largest thing on the page and almost always the LCP element,
+    so it is loaded eagerly at high priority rather than left to the browser's
+    default guess. width/height are read from the file at build time: without
+    them the browser reserves no space, and every recipe shoves its own
+    ingredients down the page the moment the photo arrives.
+  {%- endcomment -%}
   <div class="wrap wrap--narrow">
-    <img class="recipe__image" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" itemprop="image">
+    <img class="recipe__image"
+         src="{{ page.image | relative_url }}"
+         alt="{{ page.title | escape }}"
+         width="{{ page.image | image_width }}"
+         height="{{ page.image | image_height }}"
+         fetchpriority="high"
+         decoding="async">
   </div>
   {%- endif %}
 
@@ -75,7 +90,7 @@ layout: default
           <ul class="ingredients__list">
             {%- for ingredient in page.ingredients %}
               {%- assign parts = ingredient | split: "|" -%}
-              <li itemprop="recipeIngredient">
+              <li>
                 {%- if parts.size > 1 -%}
                   <span class="qty">{{ parts[0] | strip }}</span>
                   <span class="ing">{{ parts[1] | strip | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>
@@ -97,7 +112,7 @@ layout: default
         </h2>
         <ol class="method__list">
           {%- for step in page.method %}
-          <li class="step" itemprop="recipeInstructions">
+          <li class="step" id="step-{{ forloop.index }}">
             <span class="step__n" aria-hidden="true">{{ forloop.index }}</span>
             <div class="step__body">{{ step | markdownify }}</div>
           </li>
@@ -123,10 +138,18 @@ layout: default
   {%- endif %}
 
   <div class="wrap wrap--narrow">
+    {%- comment -%}
+    The tags were decoration before — the words were there but led nowhere, so
+    a reader who wanted another vegetarian dish had to go back and scan the
+    whole index. As links they are the only sideways route through the site,
+    and the only reason a crawler can reach a recipe by any path but the home
+    page.
+    {%- endcomment -%}
     {%- if page.tags and page.tags.size > 0 %}
-    <ul class="tags">
+    <ul class="tags tags--links">
       {%- for tag in page.tags %}
-      <li>{{ tag }}</li>
+      {%- assign tag_slug = tag | slugify %}
+      <li><a href="{{ '/recipes/tag/' | append: tag_slug | append: '/' | relative_url }}">{{ tag }}</a></li>
       {%- endfor %}
     </ul>
     {%- endif %}

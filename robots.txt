@@ -1,0 +1,11 @@
+---
+# jekyll-sitemap writes a robots.txt containing nothing but the Sitemap line if
+# one does not exist. This replaces it, because the default leaves the crawl
+# rules unstated and there is one directory worth excluding.
+layout: null
+sitemap: false
+---
+User-agent: *
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | absolute_url }}

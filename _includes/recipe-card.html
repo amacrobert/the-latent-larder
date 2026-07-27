@@ -36,7 +36,8 @@
       described thumbnail just makes a screen reader say the name twice.
     {%- endcomment -%}
     <span class="card__photo">
-      <img src="{{ recipe.image | relative_url }}" alt="" loading="lazy" decoding="async">
+      <img src="{{ recipe.image | relative_url }}" alt="" loading="lazy" decoding="async"
+           width="{{ recipe.image | image_width }}" height="{{ recipe.image | image_height }}">
     </span>
     {%- endif %}
 
