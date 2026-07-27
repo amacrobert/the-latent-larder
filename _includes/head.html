@@ -20,3 +20,15 @@ AdSense site verification. Loaded async so it never blocks rendering.
 {%- endcomment -%}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3109635632403464"
      crossorigin="anonymous"></script>
+
+{%- comment -%}
+Google Analytics (gtag.js). Also loaded async.
+{%- endcomment -%}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VF7Y80H0GE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VF7Y80H0GE');
+</script>
