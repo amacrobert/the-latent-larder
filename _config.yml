@@ -2,8 +2,8 @@ title: The Latent Larder
 email:
 description: >-
   Recipes from the latent space — cooking notes, ingredients, and method.
-url: "https://amacrobert.github.io"
-baseurl: "/the-latent-larder"
+url: "https://thelatentlarder.com"
+baseurl: ""
 
 plugins:
   - jekyll-feed

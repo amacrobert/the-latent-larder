@@ -16,11 +16,7 @@ docker compose run --rm site bundle install   # once, and after Gemfile changes
 docker compose up                             # serve with livereload
 ```
 
-Then open **<http://localhost:4000/the-latent-larder/>**.
-
-Note the `/the-latent-larder/` path — the site sets a `baseurl` because it is
-published to a project page rather than a domain root, and `jekyll serve`
-honours it. The bare `http://localhost:4000/` will 404.
+Then open **<http://localhost:4000/>**.
 
 Edits to any file trigger a rebuild and a browser reload. Press `Ctrl-C` to stop,
 or `docker compose down` to remove the container.
@@ -34,7 +30,7 @@ docker compose run --rm site bundle exec jekyll build
 ## Adding a recipe
 
 Create `_recipes/my-recipe.md`. The filename becomes the URL:
-`/the-latent-larder/recipes/my-recipe/`. No date is needed in the filename, and
+`/recipes/my-recipe/`. No date is needed in the filename, and
 no `layout:` line is needed — `_config.yml` applies the `recipe` layout to
 everything in the collection.
 
@@ -93,8 +89,8 @@ page, and as a snapshot on the recipe's card on the home page. A recipe without
 one still looks right — the card is simply blank ruling below the text, and
 titles stay aligned across a row that mixes the two.
 
-Put the web-ready file in `assets/images/` and reference it from the project
-root, e.g. `/assets/images/focaccia.webp`; the layouts add the `baseurl`.
+Put the web-ready file in `assets/images/` and reference it from the site root,
+e.g. `/assets/images/focaccia.webp`.
 
 Keep full-size originals in `assets/images/originals/`, which is gitignored and
 excluded from the build. To make a web version from one:
@@ -123,7 +119,7 @@ as WebP they are ~230 KB and the page is 0.61 MB.
 | `_includes/illo.html` | the hand-drawn marks (`thyme`, `whisk`, `butter`, `wheat`, `bowl`, `spoon`) |
 | `assets/main.scss` | the entire stylesheet |
 | `assets/fonts/` | self-hosted Fraunces + Source Sans 3 |
-| `_config.yml` | site metadata, `baseurl`, collection config, colophon |
+| `_config.yml` | site metadata, collection config, colophon |
 
 There is no theme gem — the layouts and CSS are self-contained, so nothing
 overrides anything and every rule is in `assets/main.scss`.
@@ -163,7 +159,9 @@ This requires **Settings → Pages → Source: GitHub Actions**. The older "Depl
 from a branch" option would ignore the `Gemfile` and build with GitHub's own
 Jekyll 3.10 instead, producing a different site from the one tested locally.
 
-Live at <https://amacrobert.github.io/the-latent-larder/>.
+Live at <https://thelatentlarder.com/>, a custom domain configured in
+**Settings → Pages**. The site is served from the domain root, so `_config.yml`
+sets an empty `baseurl` and the same paths work locally and in production.
 
 ### Gemfile.lock and CI
 

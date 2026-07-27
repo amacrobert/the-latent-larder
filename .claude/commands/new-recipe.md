@@ -115,7 +115,6 @@ grep -nE '⅓|⅔|⅛|⅜|⅝|⅞|[0-9] ?g\b|[0-9] ?ml\b|°C' _recipes/<slug>.md
 
 Then report the path you created, the dish, and how it sits alongside what was
 already in the larder. Mention that the `image:` field still needs adding, and
-that `docker compose up` previews it at
-<http://localhost:4000/the-latent-larder/>.
+that `docker compose up` previews it at <http://localhost:4000/>.
 
 Don't build, commit, or push unless the user asks.

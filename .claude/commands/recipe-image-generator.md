@@ -123,9 +123,8 @@ before `servings:` — that's where it sits in the recipes that already have one
 image: /assets/images/<Name>.webp
 ```
 
-Use `Edit`. Change nothing else in the file. The path is site-absolute with a
-leading slash, and it does **not** include the `the-latent-larder` prefix —
-Jekyll adds the baseurl at render time.
+Use `Edit`. Change nothing else in the file. The path is site-root-relative,
+with a leading slash.
 
 ## Before you finish
 
@@ -140,6 +139,6 @@ on disk disagree — fix the mismatch rather than leaving it.
 
 Then report, per recipe: the dish, the image prompt you wrote, and the webp path
 with its dimensions from `file`. On a machine with a browser, `docker compose up`
-previews the cards at <http://localhost:4000/the-latent-larder/>.
+previews the cards at <http://localhost:4000/>.
 
 Don't build, commit, or push unless the user asks.
