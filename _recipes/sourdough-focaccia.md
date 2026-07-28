@@ -6,7 +6,7 @@ image: /assets/images/Sourdough-Focaccia.webp
 servings: 8
 prep_time: 30 min
 cook_time: 25 min
-tags: [bread, baking, sourdough]
+tags: [bread, baking]
 ingredients:
   - 3¾ cups | strong white bread flour
   - 1½ cups | water, room temperature

@@ -6,7 +6,7 @@ image: /assets/images/Shrimp-And-Snap-Pea-Stir-Fry.webp
 servings: 4
 prep_time: 15 min
 cook_time: 10 min
-tags: [shrimp, quick, main]
+tags: [seafood, shrimp, quick, main]
 ingredients:
   - 1½ lb | shrimp, peeled and deveined
   - 2 tbsp | vegetable oil
