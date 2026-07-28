@@ -55,7 +55,12 @@ module TheLatentLarder
       end
 
       tags.each_value { |g| g[:recipes].sort_by! { |d| d.data["date"] }.reverse! }
-      tags.sort.to_h
+
+      # Biggest tags first: the lists these feed are meant to be entry points,
+      # and a tag with one recipe behind it is a worse door than "main" with
+      # twenty. Alphabetical breaks ties so the order stays stable between
+      # builds when counts are equal.
+      tags.sort_by { |slug, group| [-group[:recipes].length, slug] }.to_h
     end
   end
 
