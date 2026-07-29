@@ -18,12 +18,18 @@ layout: default
   The tag pages sit above the list rather than buried under it. They are the
   site's only other entry points, and a link a crawler reaches after 29 cards
   is a link it is slower to value.
+
+  Single-recipe tags are left off here. A tag page holding one link is a
+  detour to a recipe the home page already lists directly, and a dozen of
+  them dilute the tags that actually group something. They keep their pages
+  and stay reachable from /recipes/tag/ — this only trims the front door.
   {%- endcomment -%}
-  {%- if site.data.recipe_tags.size > 0 %}
+  {%- assign home_tags = site.data.recipe_tags | where_exp: "tag", "tag.count > 1" -%}
+  {%- if home_tags.size > 0 %}
   <nav class="tag-cloud tag-cloud--home" aria-label="Browse by tag">
     <h2 class="tag-cloud__heading">Browse by tag</h2>
     <ul class="tags tags--links">
-      {%- for tag in site.data.recipe_tags %}
+      {%- for tag in home_tags %}
       <li><a href="{{ tag.url | relative_url }}">{{ tag.name }} <span class="tags__count">{{ tag.count }}</span></a></li>
       {%- endfor %}
     </ul>
