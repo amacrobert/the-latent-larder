@@ -19,7 +19,7 @@ model="${OPENAI_IMAGE_MODEL:-gpt-image-1}"
 # 1536x1024 is the API's landscape option and the only one wide enough to reach
 # the site's 1400px without upscaling. Cards centre-crop it to 4:3 in CSS.
 size="${OPENAI_IMAGE_SIZE:-1536x1024}"
-quality="${OPENAI_IMAGE_QUALITY:-high}"
+quality="${OPENAI_IMAGE_QUALITY:-medium}"
 api_base="${OPENAI_API_BASE:-https://api.openai.com/v1}"
 
 die() { echo "generate-recipe-image: $*" >&2; exit 1; }
