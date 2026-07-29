@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Latent Larder">
+  <title>The Latent Larder</title>
+
+  <!--
+    The bowl from _includes/illo.html, redrawn for 16px. Three changes were
+    forced by the size: the body is filled rather than stroked (a 2.7-wide
+    outline scales to a third of a pixel and greys out to a smudge), the rim
+    line is dropped because it closed up against the bowl's own edge, and the
+    illo's steam curl became a spoon. That last one was not the plan — at this
+    weight a single wisp stops reading as steam and reads as a handle, so it
+    is drawn as a handle: it runs under the rim rather than stopping at it,
+    which is what makes it look put there rather than stuck on.
+
+    Colours are the paper and accent customs from assets/main.scss, hardcoded
+    because a favicon renders outside the document and inherits no variables.
+    (Naming them here with their leading dashes would be a double-hyphen, which
+    XML does not allow inside a comment.)
+  -->
+
+  <rect width="64" height="64" rx="13" fill="#a8451c"/>
+
+  <!-- Drawn before the bowl so the rim occludes it. -->
+  <path d="M41.5 34C47.5 19 53.5 13.5 58.5 12"
+        fill="none" stroke="#f4ecdd" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Same silhouette as the illo, filled, nudged a unit left of centre so the
+       handle's weight on the right doesn't tip the mark. -->
+  <path d="M8 29h48c0 13.4-10.6 23-24 23S8 42.4 8 29Z" fill="#f4ecdd"/>
+</svg>
