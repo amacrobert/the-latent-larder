@@ -1,6 +1,6 @@
 ---
 title: Butter-Poached Salmon with Peas and Mint
-date: 2026-07-27
+date: 2026-07-27 04:45:43 -0400
 description: Fish gone glossy and barely cooked in a low, buttery poach — the opposite of a hard sear, and better for it.
 image: /assets/images/Butter-Poached-Salmon-With-Peas-And-Mint.webp
 servings: 4

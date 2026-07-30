@@ -1,6 +1,6 @@
 ---
 title: Smoky Eggplant Dip
-date: 2026-07-26
+date: 2026-07-26 08:45:33 -0400
 description: Eggplant charred to ash on the outside so the inside tastes like it was cooked over coals.
 image: /assets/images/Smoky-Eggplant-Dip.webp
 servings: 6

@@ -1,6 +1,6 @@
 ---
 title: Salted Caramel Ice Cream
-date: 2026-07-28
+date: 2026-07-28 04:46:04 -0400
 description: A dark, bitter caramel base churned into custard, salted hard enough to keep the sweetness honest.
 image: /assets/images/Salted-Caramel-Ice-Cream.webp
 servings: 8

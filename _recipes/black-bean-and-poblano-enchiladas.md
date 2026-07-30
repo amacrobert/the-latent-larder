@@ -1,6 +1,6 @@
 ---
 title: Black Bean and Poblano Enchiladas
-date: 2026-07-27
+date: 2026-07-27 12:45:52 -0400
 description: Corn tortillas rolled around charred poblano and black beans, drowned in red chile sauce until the edges go crisp under the broiler.
 image: /assets/images/Black-Bean-And-Poblano-Enchiladas.webp
 servings: 4

@@ -1,6 +1,6 @@
 ---
 title: Saffron Rice with Crispy Tahdig
-date: 2026-07-27
+date: 2026-07-27 22:46:02 -0400
 description: Basmati steamed until the bottom fuses into a shatter-crisp golden crust, then flipped onto a platter like a cake.
 image: /assets/images/Saffron-Rice-With-Crispy-Tahdig.webp
 servings: 6

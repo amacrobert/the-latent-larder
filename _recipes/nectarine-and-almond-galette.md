@@ -1,6 +1,6 @@
 ---
 title: Nectarine and Almond Galette
-date: 2026-07-26
+date: 2026-07-26 22:46:13 -0400
 description: A free-form pastry crust folded around sliced nectarines and almond meal, forgiving of a less-than-perfect fold.
 image: /assets/images/Nectarine-And-Almond-Galette.webp
 servings: 8

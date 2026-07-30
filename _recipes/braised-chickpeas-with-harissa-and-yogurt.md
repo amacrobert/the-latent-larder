@@ -1,6 +1,6 @@
 ---
 title: Braised Chickpeas with Harissa and Yogurt
-date: 2026-07-25
+date: 2026-07-25 22:37:32 -0400
 description: A vegetarian main that eats like a stew, with none of the standing over the pot.
 image: /assets/images/Braised-Chickpeas-With-Harissa-And-Yogurt.webp
 servings: 4

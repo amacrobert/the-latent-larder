@@ -1,6 +1,6 @@
 ---
 title: Whole Roasted Cauliflower with Tahini and Date Syrup
-date: 2026-07-27
+date: 2026-07-27 03:45:40 -0400
 description: A whole head roasted until the outside is nearly burnt, carved at the table like a small, strange cake.
 image: /assets/images/Whole-Roasted-Cauliflower-With-Tahini-And-Date-Syrup.webp
 servings: 4

@@ -37,7 +37,7 @@ everything in the collection.
 ```markdown
 ---
 title: Sourdough Focaccia
-date: 2026-07-20
+date: 2026-07-20 09:15:00 -0400
 description: A one-line summary, used on the home page and for SEO.
 image: /assets/images/focaccia.jpg   # optional
 servings: 8
@@ -59,6 +59,29 @@ section at the bottom of the page — the story, substitutions, what went wrong.
 Every field except `title` is optional; the layout omits any that are absent.
 Individual `ingredients` and `method` entries may contain inline Markdown
 (`**bold**`, links).
+
+### The time in `date`
+
+`date` carries a time and a UTC offset, not just a day. More than one recipe is
+published most days, and the time is the only thing that puts them in the order
+they appeared — newest first on the home page, on each tag page, and in both
+feeds. Get it from `date +'%Y-%m-%d %H:%M:%S %z'` when you write the file.
+
+Only the date is ever shown. The recipe page prints "July 20, 2026" under
+**Written**, and keeps the full timestamp in the `<time datetime="…">` attribute
+for machines; the cards on the home page and tag pages show no date at all.
+
+A bare `date: 2026-07-20` still builds — Jekyll reads every recipe's date to a
+`Time` itself — but it lands at midnight, below every stamped recipe of that day,
+which is the ordering the time exists to fix.
+
+The `timezone:` in `_config.yml` is what makes that midnight the right one. A
+date carrying no offset is read in the local zone, and Jekyll's local zone is the
+build machine's unless the site names one: without `timezone:`, `date:
+2026-07-29` is parsed as midnight **UTC**, which is 8pm on the 28th in New York.
+It would still display "July 29" while sorting in among the 28th's recipes — a
+date that reads one way and orders another. With `timezone:` set, the two agree
+no matter whether the build ran in the container or on GitHub Actions.
 
 ### The `|` in ingredients
 

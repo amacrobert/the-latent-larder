@@ -1,6 +1,6 @@
 ---
 title: Grilled Octopus with Lemon and Oregano
-date: 2026-07-28
+date: 2026-07-28 08:45:40 -0400
 description: Simmered low until a knife slides through with no resistance, then charred hard on the grill for a crust the braise alone can't give.
 image: /assets/images/Grilled-Octopus-With-Lemon-And-Oregano.webp
 servings: 4

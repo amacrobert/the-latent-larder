@@ -48,6 +48,13 @@ layout: default
         </div>
         {%- endif %}
         {%- if page.date %}
+        {%- comment -%}
+        The date only, never the time. `date` carries one — it is what orders
+        recipes published on the same day, on the home page and in both feeds —
+        but the hour a recipe was written is not a fact a reader wants next to
+        how long it takes to cook. The full timestamp stays in the datetime
+        attribute, where it is precise for machines without being shown.
+        {%- endcomment -%}
         <div class="stats__item">
           <dt>Written</dt>
           <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: date_format }}</time></dd>

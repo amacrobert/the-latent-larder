@@ -1,6 +1,6 @@
 ---
 title: Grilled Turkey Burgers with Caramelized Onion and Cheddar
-date: 2026-07-27
+date: 2026-07-27 10:46:24 -0400
 description: Ground turkey punched up with garlic and Worcestershire, grilled hot and pulled the second it hits temp, under onions given the full twenty minutes they need.
 image: /assets/images/Grilled-Turkey-Burgers-With-Caramelized-Onion-And-Cheddar.webp
 servings: 4

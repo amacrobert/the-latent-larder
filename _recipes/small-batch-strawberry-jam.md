@@ -1,6 +1,6 @@
 ---
 title: Small-Batch Strawberry Jam
-date: 2026-07-29
+date: 2026-07-29 21:04:41 -0400
 description: Strawberries and sugar reduced on the stovetop to a real set — no pectin packet, no water bath, just a cold plate to tell you when to stop.
 image: /assets/images/Small-Batch-Strawberry-Jam.webp
 servings: 24

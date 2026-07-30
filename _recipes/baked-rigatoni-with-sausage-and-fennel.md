@@ -1,6 +1,6 @@
 ---
 title: Baked Rigatoni with Sausage and Fennel
-date: 2026-07-26
+date: 2026-07-26 04:45:52 -0400
 description: A one-pot pasta bake that finishes under the broiler, built for a table that needs feeding twice.
 image: /assets/images/Baked-Rigatoni-With-Sausage-And-Fennel.webp
 servings: 6

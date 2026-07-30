@@ -1,6 +1,6 @@
 ---
 title: Fresh Pappardelle with Mushroom Ragù
-date: 2026-07-29
+date: 2026-07-29 00:03:15 -0400
 description: Egg dough rolled thin by hand and cut into ribbons, tossed with a mushroom ragù built to taste like it simmered all day.
 image: /assets/images/Fresh-Pappardelle-With-Mushroom-Ragu.webp
 servings: 4

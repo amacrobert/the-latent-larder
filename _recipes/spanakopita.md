@@ -1,6 +1,6 @@
 ---
 title: Spanakopita
-date: 2026-07-28
+date: 2026-07-28 03:46:03 -0400
 description: Spinach and feta packed between layers of butter-brushed phyllo, baked until the top shatters like glass.
 image: /assets/images/Spanakopita.webp
 servings: 8

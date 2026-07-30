@@ -1,6 +1,6 @@
 ---
 title: Roasted Butternut Squash Soup with Crispy Sage
-date: 2026-07-26
+date: 2026-07-26 18:45:35 -0400
 description: A blender soup that tastes like more work than it is, finished with butter browned until it smells like a bakery.
 image: /assets/images/Roasted-Butternut-Squash-Soup-With-Crispy-Sage.webp
 servings: 4

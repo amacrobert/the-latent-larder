@@ -1,6 +1,6 @@
 ---
 title: Pan-Seared Pork Chops with Mustard Cream Sauce
-date: 2026-07-28
+date: 2026-07-28 07:46:15 -0400
 description: Thick-cut chops seared hard in a screaming pan, then rested while a mustard and cream sauce comes together in the same fat.
 image: /assets/images/Pan-Seared-Pork-Chops-With-Mustard-Cream-Sauce.webp
 servings: 4

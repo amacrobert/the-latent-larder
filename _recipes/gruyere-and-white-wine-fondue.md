@@ -1,6 +1,6 @@
 ---
 title: Gruyère and White Wine Fondue
-date: 2026-07-29
+date: 2026-07-29 04:03:21 -0400
 description: Grated cheese and wine coaxed with cornstarch into a pot that stays glossy instead of breaking into strings — dip bread until it's gone.
 image: /assets/images/Gruyere-And-White-Wine-Fondue.webp
 servings: 4

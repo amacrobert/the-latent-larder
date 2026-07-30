@@ -1,6 +1,6 @@
 ---
 title: Tuna Tartare with Avocado and Sesame
-date: 2026-07-29
+date: 2026-07-29 06:02:48 -0400
 description: Sushi-grade tuna cut to a fine dice and dressed in soy and sesame, ready before the knife's even rinsed off.
 image: /assets/images/Tuna-Tartare-With-Avocado-And-Sesame.webp
 servings: 4

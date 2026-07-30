@@ -1,6 +1,6 @@
 ---
 title: Baked Oatmeal with Blueberries and Almonds
-date: 2026-07-26
+date: 2026-07-26 10:45:46 -0400
 description: A custardy, sliceable oatmeal that comes out of the oven instead of a pot, built to be made once and eaten all week.
 image: /assets/images/Baked-Oatmeal-With-Blueberries-And-Almonds.webp
 servings: 6

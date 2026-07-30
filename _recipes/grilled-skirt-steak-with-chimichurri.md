@@ -1,6 +1,6 @@
 ---
 title: Grilled Skirt Steak with Chimichurri
-date: 2026-07-26
+date: 2026-07-26 06:45:20 -0400
 description: A hot grill, five minutes of restraint, and a sharp green sauce that cuts through the fat.
 image: /assets/images/Grilled-Skirt-Steak-With-Chimichurri.webp
 servings: 4

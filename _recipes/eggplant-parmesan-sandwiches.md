@@ -1,6 +1,6 @@
 ---
 title: Eggplant Parmesan Sandwiches
-date: 2026-07-28
+date: 2026-07-28 10:46:32 -0400
 description: Breaded and fried eggplant stacked with marinara and melted mozzarella, built for a bite instead of a fork.
 image: /assets/images/Eggplant-Parmesan-Sandwiches.webp
 servings: 4

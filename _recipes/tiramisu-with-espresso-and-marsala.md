@@ -1,6 +1,6 @@
 ---
 title: Tiramisu with Espresso and Marsala
-date: 2026-07-29
+date: 2026-07-29 14:03:30 -0400
 description: Espresso-soaked ladyfingers under a cooked mascarpone custard, dusted dark with cocoa — better the day after it's made than the day it is.
 image: /assets/images/Tiramisu-With-Espresso-And-Marsala.webp
 servings: 8

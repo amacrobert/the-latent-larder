@@ -1,6 +1,6 @@
 ---
 title: Whole Roasted Branzino with Lemon and Fennel
-date: 2026-07-27
+date: 2026-07-27 07:45:59 -0400
 description: A whole fish roasted hot and fast on a screaming pan, stuffed with lemon and fennel, brought to the table bones and all.
 image: /assets/images/Whole-Roasted-Branzino-With-Lemon-And-Fennel.webp
 servings: 4

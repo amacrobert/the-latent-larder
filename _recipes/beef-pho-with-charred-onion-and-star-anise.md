@@ -1,6 +1,6 @@
 ---
 title: Beef Pho with Charred Onion and Star Anise
-date: 2026-07-28
+date: 2026-07-28 02:47:14 -0400
 description: A bone broth simmered most of an afternoon, then poured boiling over raw-sliced beef so the broth itself finishes the meat at the table.
 image: /assets/images/Beef-Pho-With-Charred-Onion-And-Star-Anise.webp
 servings: 4

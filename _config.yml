@@ -9,6 +9,15 @@ url: "https://thelatentlarder.com"
 baseurl: ""
 lang: en
 
+# The zone recipe timestamps are read in when they don't name one themselves.
+# Recipes carry a full `date: 2026-07-29 18:03:11 -0400` so that same-day ones
+# list in the order they were published, and an explicit offset needs no help
+# from this. But without it a date written without an offset would be read in
+# the build machine's zone — the container's here, UTC on GitHub Actions — which
+# is a different instant, and near midnight a different day, depending on where
+# the site was built.
+timezone: America/New_York
+
 # No `author:` here on purpose. jekyll-seo-tag would turn a string into a
 # schema.org Person, and the larder is not one — the recipe schema names it as
 # an Organization instead, which is both true and what a publisher should be.

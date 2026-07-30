@@ -1,6 +1,6 @@
 ---
 title: Parmesan Polenta with Garlicky Braised Kale
-date: 2026-07-27
+date: 2026-07-27 19:45:33 -0400
 description: A pot of cornmeal stirred into something creamy, with a skillet of garlicky kale so it isn't just a bowl of starch.
 image: /assets/images/Parmesan-Polenta-With-Garlicky-Braised-Kale.webp
 servings: 4

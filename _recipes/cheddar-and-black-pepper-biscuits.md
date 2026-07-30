@@ -1,6 +1,6 @@
 ---
 title: Cheddar and Black Pepper Biscuits
-date: 2026-07-28
+date: 2026-07-28 05:45:57 -0400
 description: Cold butter and a hot oven, folded into layers instead of kneaded — the fastest bread in the larder.
 image: /assets/images/Cheddar-And-Black-Pepper-Biscuits.webp
 servings: 8

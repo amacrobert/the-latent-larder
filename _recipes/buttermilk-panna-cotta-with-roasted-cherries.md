@@ -1,6 +1,6 @@
 ---
 title: Buttermilk Panna Cotta with Roasted Cherries
-date: 2026-07-25
+date: 2026-07-25 22:45:25 -0400
 description: A barely-set dessert with enough tang to stop it tasting like sweetened cream.
 image: /assets/images/Buttermilk-Panna-Cotta-With-Roasted-Cherries.webp
 servings: 6

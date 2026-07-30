@@ -1,6 +1,6 @@
 ---
 title: Leek and Gruyère Frittata
-date: 2026-07-27
+date: 2026-07-27 05:46:24 -0400
 description: Eggs baked slow with sweet leeks and melted Gruyère until barely set — a breakfast that's just as good sliced cold at noon.
 image: /assets/images/Leek-And-Gruyere-Frittata.webp
 servings: 4

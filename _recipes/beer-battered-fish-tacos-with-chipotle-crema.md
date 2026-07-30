@@ -1,6 +1,6 @@
 ---
 title: Beer-Battered Fish Tacos with Chipotle Crema
-date: 2026-07-28
+date: 2026-07-28 09:46:09 -0400
 description: Cod fried in a beer batter until it crackles, folded into warm tortillas with slaw and a smoky crema.
 image: /assets/images/Beer-Battered-Fish-Tacos-With-Chipotle-Crema.webp
 servings: 4

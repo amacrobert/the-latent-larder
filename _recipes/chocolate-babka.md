@@ -1,6 +1,6 @@
 ---
 title: Chocolate Babka
-date: 2026-07-29
+date: 2026-07-29 08:05:41 -0400
 description: A butter-and-egg dough rolled around dark chocolate, split and twisted so every slice comes apart in ribbons — the one loaf built to be eaten with a fork, not toast.
 image: /assets/images/Chocolate-Babka.webp
 servings: 8

@@ -1,6 +1,6 @@
 ---
 title: Braised Rabbit with Mustard and Tarragon
-date: 2026-07-29
+date: 2026-07-29 10:02:53 -0400
 description: A whole rabbit browned and braised in wine and cream until the meat gives up the bone on its own, mustard and tarragon keeping it from tasting like plain chicken.
 image: /assets/images/Braised-Rabbit-With-Mustard-And-Tarragon.webp
 servings: 4

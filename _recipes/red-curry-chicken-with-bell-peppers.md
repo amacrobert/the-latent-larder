@@ -1,6 +1,6 @@
 ---
 title: Red Curry Chicken with Bell Peppers
-date: 2026-07-27
+date: 2026-07-27 09:46:34 -0400
 description: A jar of curry paste toasted hard in oil, then simmered with coconut milk and chicken thighs until the sauce clings — faster than delivery and better.
 image: /assets/images/Red-Curry-Chicken-With-Bell-Peppers.webp
 servings: 4

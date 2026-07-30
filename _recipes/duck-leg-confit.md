@@ -1,6 +1,6 @@
 ---
 title: Duck Leg Confit
-date: 2026-07-28
+date: 2026-07-28 06:46:20 -0400
 description: Duck legs cured a day ahead, then cooked low and slow under their own fat until the meat falls off the bone.
 image: /assets/images/Duck-Leg-Confit.webp
 servings: 4

@@ -1,6 +1,6 @@
 ---
 title: Sheet-Pan Chicken with Lemon and Olives
-date: 2026-07-25
+date: 2026-07-25 23:44:56 -0400
 description: Bone-in thighs roasted hard until the skin shatters, with olives and lemon doing the sauce's job.
 image: /assets/images/Sheet-Pan-Chicken-With-Lemon-And-Olives.webp
 servings: 4

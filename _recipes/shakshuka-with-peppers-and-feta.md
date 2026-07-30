@@ -1,6 +1,6 @@
 ---
 title: Shakshuka with Peppers and Feta
-date: 2026-07-26
+date: 2026-07-26 02:45:10 -0400
 description: Eggs poached in a thick, smoky pepper sauce, eaten straight from the pan with bread.
 image: /assets/images/Shakshuka-With-Peppers-And-Feta.webp
 servings: 4

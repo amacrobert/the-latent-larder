@@ -1,6 +1,6 @@
 ---
 title: Everything Bagels
-date: 2026-07-28
+date: 2026-07-28 20:03:08 -0400
 description: A stiff, low-hydration dough boiled before it's baked, the only way to get a shiny crust and a chew that fights back.
 image: /assets/images/Everything-Bagels.webp
 servings: 8

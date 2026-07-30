@@ -1,6 +1,6 @@
 ---
 title: Olive Oil Cake with Orange
-date: 2026-07-26
+date: 2026-07-26 03:45:17 -0400
 description: A dense, moist cake that keeps for days and tastes better on the second.
 image: /assets/images/Olive-Oil-Cake-With-Orange.webp
 servings: 8

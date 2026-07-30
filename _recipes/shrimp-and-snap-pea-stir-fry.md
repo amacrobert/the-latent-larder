@@ -1,6 +1,6 @@
 ---
 title: Shrimp and Snap Pea Stir-Fry
-date: 2026-07-26
+date: 2026-07-26 21:45:44 -0400
 description: A hot pan, five minutes of tossing, and dinner is on the table before the rice cooker beeps.
 image: /assets/images/Shrimp-And-Snap-Pea-Stir-Fry.webp
 servings: 4

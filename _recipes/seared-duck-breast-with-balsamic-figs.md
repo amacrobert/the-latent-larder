@@ -1,6 +1,6 @@
 ---
 title: Seared Duck Breast with Balsamic Figs
-date: 2026-07-27
+date: 2026-07-27 00:45:41 -0400
 description: Skin rendered slow in a cold pan until it shatters, then a fig and balsamic sauce built in the same fat.
 image: /assets/images/Seared-Duck-Breast-With-Balsamic-Figs.webp
 servings: 2

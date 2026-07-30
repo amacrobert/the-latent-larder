@@ -1,6 +1,6 @@
 ---
 title: Dark Chocolate Pots de Crème
-date: 2026-07-28
+date: 2026-07-28 00:46:02 -0400
 description: A baked custard, not a pudding — six ramekins in a water bath until the centers still hold a wobble.
 image: /assets/images/Dark-Chocolate-Pots-De-Creme.webp
 servings: 6

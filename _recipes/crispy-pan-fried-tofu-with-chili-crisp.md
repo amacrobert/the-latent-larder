@@ -1,6 +1,6 @@
 ---
 title: Crispy Pan-Fried Tofu with Chili Crisp
-date: 2026-07-26
+date: 2026-07-26 11:45:22 -0400
 description: Tofu fried hard in a cast-iron pan until the crust shatters, then tossed in chili crisp — a fifteen-minute main that doesn't miss the meat.
 image: /assets/images/Crispy-Pan-Fried-Tofu-With-Chili-Crisp.webp
 servings: 2

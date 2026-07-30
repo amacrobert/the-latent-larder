@@ -1,6 +1,6 @@
 ---
 title: Chicken and Andouille Gumbo
-date: 2026-07-29
+date: 2026-07-29 21:32:26 -0400
 description: A dark roux built low and slow into a chicken-and-sausage stew, thickened with okra instead of a shortcut.
 image: /assets/images/Chicken-And-Andouille-Gumbo.webp
 servings: 6

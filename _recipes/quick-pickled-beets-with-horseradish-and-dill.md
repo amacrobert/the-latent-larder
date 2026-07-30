@@ -1,6 +1,6 @@
 ---
 title: Quick-Pickled Beets with Horseradish and Dill
-date: 2026-07-27
+date: 2026-07-27 11:45:53 -0400
 description: Boiled beets cooled in a sharp vinegar brine, piled onto a horseradish cream that cuts right back through the sweetness.
 image: /assets/images/Quick-Pickled-Beets-With-Horseradish-And-Dill.webp
 servings: 6

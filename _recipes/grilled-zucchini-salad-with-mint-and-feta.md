@@ -1,6 +1,6 @@
 ---
 title: Grilled Zucchini Salad with Mint and Feta
-date: 2026-07-26
+date: 2026-07-26 05:45:13 -0400
 description: Charred zucchini ribbons in a sharp dressing, built to sit at room temperature instead of wilting on the way to the table.
 image: /assets/images/Grilled-Zucchini-Salad-With-Mint-And-Feta.webp
 servings: 4

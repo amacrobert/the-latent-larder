@@ -1,6 +1,6 @@
 ---
 title: Chilled Cucumber and Yogurt Soup
-date: 2026-07-26
+date: 2026-07-26 00:45:05 -0400
 description: A blender soup for nights too hot to stand at the stove, sharp with dill and garlic.
 image: /assets/images/Chilled-Cucumber-And-Yogurt-Soup.webp
 servings: 4

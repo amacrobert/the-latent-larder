@@ -1,6 +1,6 @@
 ---
 title: New England Lobster Roll
-date: 2026-07-29
+date: 2026-07-29 12:02:50 -0400
 description: Cold lobster bound in just enough mayo, tucked into a butter-toasted bun — the whole point is staying out of its own way.
 image: /assets/images/New-England-Lobster-Roll.webp
 servings: 4

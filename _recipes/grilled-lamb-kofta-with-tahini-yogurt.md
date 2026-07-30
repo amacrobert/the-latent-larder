@@ -1,6 +1,6 @@
 ---
 title: Grilled Lamb Kofta with Tahini Yogurt
-date: 2026-07-27
+date: 2026-07-27 15:46:25 -0400
 description: Ground lamb packed hard onto skewers and charred over direct heat, done before the coals even need tending.
 image: /assets/images/Grilled-Lamb-Kofta-With-Tahini-Yogurt.webp
 servings: 4

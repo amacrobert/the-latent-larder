@@ -1,6 +1,6 @@
 ---
 title: Egg Fried Rice with Scallions and Peas
-date: 2026-07-28
+date: 2026-07-28 14:02:33 -0400
 description: Day-old rice separated to distinct grains in a screaming-hot wok, faster than delivery and better with whatever's in the crisper.
 image: /assets/images/Egg-Fried-Rice-With-Scallions-And-Peas.webp
 servings: 4

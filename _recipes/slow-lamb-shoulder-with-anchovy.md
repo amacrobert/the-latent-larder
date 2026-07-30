@@ -1,6 +1,6 @@
 ---
 title: Slow Lamb Shoulder with Anchovy
-date: 2026-07-25
+date: 2026-07-25 21:31:55 -0400
 description: Five hours of doing nothing, and the meat comes apart with a spoon.
 image: /assets/images/Slow-Lamb-Shoulder-With-Anchovy.webp
 servings: 6

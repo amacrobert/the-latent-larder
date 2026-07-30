@@ -1,6 +1,6 @@
 ---
 title: French Onion Soup
-date: 2026-07-26
+date: 2026-07-26 07:45:07 -0400
 description: A pot of onions, cooked slowly until they taste like something else entirely, under a raft of melted Gruyère.
 image: /assets/images/French-Onion-Soup.webp
 servings: 4

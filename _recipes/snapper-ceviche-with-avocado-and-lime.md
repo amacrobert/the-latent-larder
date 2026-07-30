@@ -1,6 +1,6 @@
 ---
 title: Snapper Ceviche with Avocado and Lime
-date: 2026-07-26
+date: 2026-07-26 23:45:54 -0400
 description: Raw fish cured firm in citrus instead of heat, on the table in half an hour with no stove involved.
 image: /assets/images/Snapper-Ceviche-With-Avocado-And-Lime.webp
 servings: 4

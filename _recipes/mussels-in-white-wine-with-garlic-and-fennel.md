@@ -1,6 +1,6 @@
 ---
 title: Mussels in White Wine with Garlic and Fennel
-date: 2026-07-26
+date: 2026-07-26 01:45:27 -0400
 description: A pot of shells and broth in twenty minutes flat, best eaten with bread instead of a spoon.
 image: /assets/images/Mussels-In-White-Wine-With-Garlic-And-Fennel.webp
 servings: 2

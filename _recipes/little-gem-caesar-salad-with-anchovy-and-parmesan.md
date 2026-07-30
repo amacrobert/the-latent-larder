@@ -1,6 +1,6 @@
 ---
 title: Little Gem Caesar Salad with Anchovy and Parmesan
-date: 2026-07-29
+date: 2026-07-29 02:03:19 -0400
 description: A raw egg yolk and a mashed anchovy whisked into a dressing sharper than anything from a bottle, tossed with lettuce that still has some crunch left in it.
 image: /assets/images/Little-Gem-Caesar-Salad-With-Anchovy-And-Parmesan.webp
 servings: 4

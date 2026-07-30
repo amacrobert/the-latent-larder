@@ -6,7 +6,7 @@ allowed-tools: Bash(grep:*), Bash(date:*), Bash(ls:*), Read, Write, Glob
 
 # Add a recipe to The Latent Larder
 
-Today's date: !`date +%Y-%m-%d`
+Right now: !`date +'%Y-%m-%d %H:%M:%S %z'`
 
 ## Already in the larder
 
@@ -39,7 +39,7 @@ use lowercase words separated by hyphens (`_recipes/braised-white-beans.md` →
 ```yaml
 ---
 title: Braised White Beans
-date: <today, from above>
+date: <the full timestamp from above, copied exactly>
 description: One dry, concrete line. What it is and why you'd make it.
 servings: 4
 prep_time: 10 min
@@ -64,6 +64,14 @@ both look right without one.
 **No `layout:` line** either — `_config.yml` applies it to the whole collection.
 
 ## Rules that are easy to get wrong
+
+**`date` needs the time and the offset**, not just the day — copy the timestamp
+above verbatim. Several recipes are published a day, and the time is the only
+thing that puts them in the order they appeared, on the home page and in both
+feeds. Only the date is ever displayed, so the time costs the reader nothing.
+Writing a bare `date: 2026-07-29` builds fine but lands the recipe at midnight,
+below everything else published that day — which is the one thing the timestamp
+is there to prevent.
 
 **Imperial measurements only.** Cups, oz, lb, tsp, tbsp, and °F. Never grams,
 millilitres, or °C anywhere — including inside method steps and notes.
@@ -107,10 +115,12 @@ has actually cooked this telling you the part that matters.
 
 ## Before you finish
 
-Run this against the file you wrote. It must return nothing:
+Run these against the file you wrote. The first must return nothing, and the
+second must print the `date:` line with a time and an offset on it:
 
 ```bash
 grep -nE '⅓|⅔|⅛|⅜|⅝|⅞|[0-9] ?g\b|[0-9] ?ml\b|°C' _recipes/<slug>.md
+grep -nE '^date: [0-9-]{10} [0-9:]{8} [-+][0-9]{4}$' _recipes/<slug>.md
 ```
 
 Then report the path you created, the dish, and how it sits alongside what was

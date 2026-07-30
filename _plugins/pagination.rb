@@ -24,10 +24,14 @@ module TheLatentLarder
       size.positive? ? size : DEFAULT_PER_PAGE
     end
 
-    # Newest first. The path breaks ties because several recipes can share a
-    # date — sort_by alone is not stable, and without a tiebreak the order of
-    # same-day recipes could differ between builds, which across a page
-    # boundary means a recipe appearing twice or not at all.
+    # Newest first, by the whole timestamp — recipes are published several times
+    # a day, and a date alone would leave every one of a day's recipes tied.
+    #
+    # The path still breaks ties, for the two seed recipes that predate the
+    # nightly run and sit at midnight, and for anything hand-written without a
+    # time. sort_by alone is not stable, and unbroken ties could order
+    # differently between builds, which across a page boundary means a recipe
+    # appearing twice or not at all.
     def by_date_desc(docs)
       docs.sort_by { |doc| [doc.data["date"], doc.path] }.reverse
     end

@@ -1,6 +1,6 @@
 ---
 title: Buttermilk Fried Chicken Sandwiches
-date: 2026-07-27
+date: 2026-07-27 14:45:47 -0400
 description: Thighs brined in buttermilk, pressed hard into seasoned flour, and fried until the crust cracks louder than the pickle on top.
 image: /assets/images/Buttermilk-Fried-Chicken-Sandwiches.webp
 servings: 4

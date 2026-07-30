@@ -1,6 +1,6 @@
 ---
 title: Ribollita
-date: 2026-07-29
+date: 2026-07-29 18:03:11 -0400
 description: Yesterday's vegetable and bean soup, thickened with stale bread until a spoon stands up in it.
 image: /assets/images/Ribollita.webp
 servings: 6

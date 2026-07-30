@@ -1,6 +1,6 @@
 ---
 title: Chicken Liver Pâté with Brandy and Thyme
-date: 2026-07-28
+date: 2026-07-28 18:02:46 -0400
 description: Livers seared hard and blended smooth with butter and brandy, an appetizer that tastes like more effort than a food processor actually requires.
 image: /assets/images/Chicken-Liver-Pate-With-Brandy-And-Thyme.webp
 servings: 6

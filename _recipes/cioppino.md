@@ -1,6 +1,6 @@
 ---
 title: Cioppino
-date: 2026-07-27
+date: 2026-07-27 02:45:10 -0400
 description: A tomato-and-wine seafood stew built to hold whatever's freshest at the fish counter, mopped up with torn bread.
 image: /assets/images/Cioppino.webp
 servings: 4

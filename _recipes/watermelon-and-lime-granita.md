@@ -1,6 +1,6 @@
 ---
 title: Watermelon and Lime Granita
-date: 2026-07-26
+date: 2026-07-26 13:45:42 -0400
 description: Frozen in a pan and raked into shards, this is dessert for a day too hot to turn on the stove.
 image: /assets/images/Watermelon-And-Lime-Granita.webp
 servings: 6

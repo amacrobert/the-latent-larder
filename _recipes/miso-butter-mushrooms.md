@@ -1,6 +1,6 @@
 ---
 title: Miso Butter Mushrooms
-date: 2026-07-24
+date: 2026-07-24 00:00:00 -0400
 description: A ten-minute side that behaves like a main course.
 image: /assets/images/Miso-Butter-Mushrooms.webp
 servings: 2

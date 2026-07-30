@@ -1,6 +1,6 @@
 ---
 title: Potato Gratin with Thyme
-date: 2026-07-26
+date: 2026-07-26 17:46:06 -0400
 description: Sliced potatoes baked slowly in cream until the dish turns into its own sauce.
 image: /assets/images/Potato-Gratin-With-Thyme.webp
 servings: 6

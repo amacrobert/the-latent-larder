@@ -1,6 +1,6 @@
 ---
 title: Napa Cabbage Kimchi
-date: 2026-07-27
+date: 2026-07-27 21:46:35 -0400
 description: Salted cabbage packed with chili paste and left to sour on the counter — a condiment that does more work the longer you leave it alone.
 image: /assets/images/Napa-Cabbage-Kimchi.webp
 servings: 12

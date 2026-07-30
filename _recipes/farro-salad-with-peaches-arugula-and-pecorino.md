@@ -1,6 +1,6 @@
 ---
 title: Farro Salad with Peaches, Arugula, and Pecorino
-date: 2026-07-26
+date: 2026-07-26 15:45:49 -0400
 description: A boiled-grain salad built for the peak of peach season, dressed while everything's still warm enough to drink in the vinaigrette.
 image: /assets/images/Farro-Salad-With-Peaches-Arugula-And-Pecorino.webp
 servings: 4

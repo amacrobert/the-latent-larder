@@ -1,6 +1,6 @@
 ---
 title: Pan-Fried Pork and Napa Cabbage Dumplings
-date: 2026-07-26
+date: 2026-07-26 20:45:51 -0400
 description: Seared crisp on one side and steamed soft on the other, gone before the second batch is out of the pan.
 image: /assets/images/Pan-Fried-Pork-And-Napa-Cabbage-Dumplings.webp
 servings: 4

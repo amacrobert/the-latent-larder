@@ -1,6 +1,6 @@
 ---
 title: Seared Scallops with White Bean Purée and Salsa Verde
-date: 2026-07-28
+date: 2026-07-28 01:46:04 -0400
 description: Scallops seared hard in a ripping pan over a garlicky bean purée, finished with a sharp herb sauce — fifteen minutes that looks like more.
 image: /assets/images/Seared-Scallops-With-White-Bean-Puree-And-Salsa-Verde.webp
 servings: 4

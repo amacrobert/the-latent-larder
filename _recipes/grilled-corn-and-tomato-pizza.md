@@ -1,6 +1,6 @@
 ---
 title: Grilled Corn and Tomato Pizza
-date: 2026-07-27
+date: 2026-07-27 23:45:46 -0400
 description: Dough charred straight on the grill grates, topped in a rush while the first side is still hot enough to melt the cheese.
 image: /assets/images/Grilled-Corn-And-Tomato-Pizza.webp
 servings: 4

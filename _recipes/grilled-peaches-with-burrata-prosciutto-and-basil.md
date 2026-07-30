@@ -1,6 +1,6 @@
 ---
 title: Grilled Peaches with Burrata, Prosciutto, and Basil
-date: 2026-07-27
+date: 2026-07-27 20:45:34 -0400
 description: Charred peaches against cold burrata and salty prosciutto — a five-ingredient plate that's mostly assembly.
 image: /assets/images/Grilled-Peaches-With-Burrata-Prosciutto-And-Basil.webp
 servings: 4

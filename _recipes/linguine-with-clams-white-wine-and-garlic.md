@@ -1,6 +1,6 @@
 ---
 title: Linguine with Clams, White Wine, and Garlic
-date: 2026-07-27
+date: 2026-07-27 06:45:52 -0400
 description: Clams steamed open in wine and garlic, their own liquor doing the work of a sauce, tossed through pasta before it's fully drained.
 image: /assets/images/Linguine-With-Clams-White-Wine-And-Garlic.webp
 servings: 4

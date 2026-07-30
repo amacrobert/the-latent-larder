@@ -1,6 +1,6 @@
 ---
 title: Red Wine-Braised Beef Short Ribs
-date: 2026-07-27
+date: 2026-07-27 01:45:19 -0400
 description: Bone-in ribs seared hard, then given three hours in the oven until the meat pulls off the bone on its own.
 image: /assets/images/Red-Wine-Braised-Beef-Short-Ribs.webp
 servings: 4

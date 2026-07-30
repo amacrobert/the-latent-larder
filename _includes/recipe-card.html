@@ -10,7 +10,6 @@
   space that would otherwise be blank ruling.
 {%- endcomment -%}
 {%- assign recipe = include.recipe -%}
-{%- assign date_format = site.date_format | default: "%B %-d, %Y" -%}
 {%- assign tilt = include.index | modulo: 3 -%}
 
 <li class="card card--tilt{{ tilt }}{% if recipe.image %} card--has-photo{% endif %}" style="--stagger: {{ include.index }}">

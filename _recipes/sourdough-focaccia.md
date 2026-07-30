@@ -1,6 +1,6 @@
 ---
 title: Sourdough Focaccia
-date: 2026-07-20
+date: 2026-07-20 00:00:00 -0400
 description: Blistered, olive-oil-drenched, and forgiving of almost every mistake.
 image: /assets/images/Sourdough-Focaccia.webp
 servings: 8

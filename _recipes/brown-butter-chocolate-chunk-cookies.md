@@ -1,6 +1,6 @@
 ---
 title: Brown Butter Chocolate Chunk Cookies
-date: 2026-07-26
+date: 2026-07-26 16:46:01 -0400
 description: Butter cooked past melted into nutty and brown, then a fridge rest so the middle stays soft while the edges go crisp.
 image: /assets/images/Brown-Butter-Chocolate-Chunk-Cookies.webp
 servings: 18

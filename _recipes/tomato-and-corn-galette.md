@@ -1,6 +1,6 @@
 ---
 title: Tomato and Corn Galette
-date: 2026-07-26
+date: 2026-07-26 14:45:29 -0400
 description: A free-form cornmeal crust folded around ripe tomatoes and corn, no pan or tart ring required.
 image: /assets/images/Tomato-And-Corn-Galette.webp
 servings: 6

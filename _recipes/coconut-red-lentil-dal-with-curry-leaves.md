@@ -1,6 +1,6 @@
 ---
 title: Coconut Red Lentil Dal with Curry Leaves
-date: 2026-07-26
+date: 2026-07-26 19:45:52 -0400
 description: Lentils that cook down to nothing on their own, saved by a hot pan of popped spices poured over at the last second.
 image: /assets/images/Coconut-Red-Lentil-Dal-With-Curry-Leaves.webp
 servings: 4

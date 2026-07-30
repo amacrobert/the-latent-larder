@@ -1,6 +1,6 @@
 ---
 title: Pan-Fried Crab Cakes with Lemon Aioli
-date: 2026-07-27
+date: 2026-07-27 17:45:45 -0400
 description: Lump crab bound with just enough panko to hold its shape, fried hard in a skillet until the crust is the only thing between you and the crab.
 image: /assets/images/Pan-Fried-Crab-Cakes-With-Lemon-Aioli.webp
 servings: 4

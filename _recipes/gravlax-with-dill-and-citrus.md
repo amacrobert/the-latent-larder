@@ -1,6 +1,6 @@
 ---
 title: Gravlax with Dill and Citrus
-date: 2026-07-28
+date: 2026-07-28 16:02:52 -0400
 description: Salmon buried under salt, sugar, and dill for three days until it cures firm enough to slice paper-thin, no stove required.
 image: /assets/images/Gravlax-With-Dill-And-Citrus.webp
 servings: 8

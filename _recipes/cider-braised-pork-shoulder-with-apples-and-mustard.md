@@ -1,6 +1,6 @@
 ---
 title: Cider-Braised Pork Shoulder with Apples and Mustard
-date: 2026-07-26
+date: 2026-07-26 12:46:17 -0400
 description: Pork shoulder browned hard, then left alone for three hours until a fork goes through it without resistance.
 image: /assets/images/Cider-Braised-Pork-Shoulder-With-Apples-And-Mustard.webp
 servings: 6

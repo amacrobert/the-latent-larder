@@ -1,6 +1,6 @@
 ---
 title: No-Knead Dutch Oven Bread
-date: 2026-07-27
+date: 2026-07-27 18:45:41 -0400
 description: A crusty round loaf built on an overnight rise instead of a mixer, baked covered so the crust blisters on its own steam.
 image: /assets/images/No-Knead-Dutch-Oven-Bread.webp
 servings: 8

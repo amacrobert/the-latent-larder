@@ -1,6 +1,6 @@
 ---
 title: Spatchcocked Roast Chicken with Garlic and Lemon
-date: 2026-07-28
+date: 2026-07-28 11:46:42 -0400
 description: Cutting out the backbone flattens the bird so it roasts in under an hour, skin gone crisp everywhere instead of just on top.
 image: /assets/images/Spatchcocked-Roast-Chicken-With-Garlic-And-Lemon.webp
 servings: 4

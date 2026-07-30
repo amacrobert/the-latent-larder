@@ -1,6 +1,6 @@
 ---
 title: Asparagus and Lemon Risotto
-date: 2026-07-26
+date: 2026-07-26 09:45:35 -0400
 description: A pot that asks for your attention for twenty minutes straight and pays it back in starch.
 image: /assets/images/Asparagus-And-Lemon-Risotto.webp
 servings: 4

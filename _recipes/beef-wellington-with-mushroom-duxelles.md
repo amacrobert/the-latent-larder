@@ -1,6 +1,6 @@
 ---
 title: Beef Wellington with Mushroom Duxelles
-date: 2026-07-29
+date: 2026-07-29 20:02:42 -0400
 description: A tenderloin seared hard, wrapped in mushroom duxelles and puff pastry, and roasted until the crust shatters and the center stays rare.
 image: /assets/images/Beef-Wellington-With-Mushroom-Duxelles.webp
 servings: 6

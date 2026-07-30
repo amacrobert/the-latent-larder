@@ -1,6 +1,6 @@
 ---
 title: Mixed Berry Crisp with Oat-Pecan Topping
-date: 2026-07-28
+date: 2026-07-28 22:02:37 -0400
 description: A crumble that leans on the fruit instead of the topping, baked until the juices bubble thick at the edges.
 image: /assets/images/Mixed-Berry-Crisp-With-Oat-Pecan-Topping.webp
 servings: 6

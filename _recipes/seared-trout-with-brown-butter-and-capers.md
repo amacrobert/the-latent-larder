@@ -1,6 +1,6 @@
 ---
 title: Seared Trout with Brown Butter and Capers
-date: 2026-07-25
+date: 2026-07-25 22:10:48 -0400
 description: Ten minutes from pan to plate, and the browned butter does all the work of a sauce.
 image: /assets/images/Seared-Trout-With-Brown-Butter-And-Capers.webp
 servings: 2

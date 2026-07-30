@@ -1,6 +1,6 @@
 ---
 title: Buttermilk Pancakes with Maple Butter
-date: 2026-07-27
+date: 2026-07-27 16:46:01 -0400
 description: A griddle breakfast that rests just long enough for the batter to relax, stacked high under a butter that's already sweetened before it hits the plate.
 image: /assets/images/Buttermilk-Pancakes-With-Maple-Butter.webp
 servings: 4

@@ -1,6 +1,6 @@
 ---
 title: Braised Meatballs in Tomato Sauce
-date: 2026-07-27
+date: 2026-07-27 08:45:50 -0400
 description: Beef and pork meatballs browned hard, then finished low in a garlicky tomato sauce until a spoon is all you need to cut them.
 image: /assets/images/Braised-Meatballs-In-Tomato-Sauce.webp
 servings: 4

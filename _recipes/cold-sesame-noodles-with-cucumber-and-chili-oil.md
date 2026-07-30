@@ -1,6 +1,6 @@
 ---
 title: Cold Sesame Noodles with Cucumber and Chili Oil
-date: 2026-07-27
+date: 2026-07-27 13:46:01 -0400
 description: Wheat noodles rinsed cold and coated in a peanut-sesame sauce, a starter or side that never goes near a stove after the pot drains.
 image: /assets/images/Cold-Sesame-Noodles-With-Cucumber-And-Chili-Oil.webp
 servings: 4
