@@ -128,6 +128,32 @@ crop existed have no original left to work from, so their tall crop comes from
 the published 1400px WebP and their wide file is left untouched rather than put
 through a second lossy pass.
 
+### Feeds
+
+Two, and they are not interchangeable:
+
+| Feed | Format | For |
+|---|---|---|
+| `/feed.xml` | Atom | people, and anything that reads feeds. Carries the wide hero |
+| `/pinterest.xml` | RSS 2.0 | Pinterest's auto-publish only. Carries the 2:3 crop |
+
+`/feed.xml` is the one advertised in `<head>`. `/pinterest.xml` is advertised
+nowhere and kept out of the sitemap: it is a publishing endpoint, pasted into
+Pinterest's settings once, and a person who subscribed to it would get pin
+captions instead of recipes.
+
+Pinterest turns each new item into a pin, which is what the differences are for.
+The image is the pin, so it is the tall crop. The description is the pin's
+caption and the text Pinterest searches, so it is plain prose plus the tags
+rather than the recipe's HTML body. Each item declares its image three ways —
+`media:content`, `enclosure`, and an `<img>` inside `content:encoded` — all
+pointing at the same file, so whichever one Pinterest's parser reaches for, the
+pin gets the crop.
+
+It carries the 20 most recent recipes; raise `feed.pinterest_limit` in
+`_config.yml` to backfill more. Only recipes with a photo appear, since a pin
+without an image is not a pin.
+
 ## Layout of the repo
 
 | Path | Purpose |
@@ -145,6 +171,8 @@ through a second lossy pass.
 | `assets/fonts/` | self-hosted Fraunces + Source Sans 3 |
 | `_config.yml` | site metadata, collection config, colophon |
 | `bin/resize-recipe-image` | the published WebP derivatives, wide and tall |
+| `feed.xml` | the Atom feed |
+| `pinterest.xml` | the RSS feed Pinterest auto-publishes from |
 
 There is no theme gem — the layouts and CSS are self-contained, so nothing
 overrides anything and every rule is in `assets/main.scss`.

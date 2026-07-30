@@ -1,0 +1,112 @@
+---
+# An RSS feed written for Pinterest's auto-publish, and for nothing else.
+#
+# Pinterest polls a feed and turns each new item into a pin. That makes it a
+# publishing endpoint rather than a reading one, and the two want different
+# things badly enough to be worth separating:
+#
+#   * The image is the pin. /feed.xml carries the wide hero, because that is
+#     the picture on the page; this carries the 2:3 crop, because that is the
+#     shape that fills a column of the Pinterest feed.
+#   * The description is the pin's caption and the text Pinterest searches, so
+#     it is plain prose here rather than the recipe's HTML body.
+#   * There is no <link rel="alternate"> pointing at this in <head>, and it is
+#     kept out of the sitemap. A person subscribing to the larder should get
+#     /feed.xml; this URL is pasted into Pinterest's settings once and is not
+#     meant to be found any other way.
+#
+# RSS 2.0 rather than Atom, and the image is declared three times over — as
+# media:content, as an enclosure, and as an <img> in content:encoded. All three
+# name the same file, so whichever one Pinterest's parser reaches for, the pin
+# gets the tall crop.
+layout: null
+sitemap: false
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:media="http://search.yahoo.com/mrss/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    {%- comment -%}
+    A recipe with no photo cannot become a pin, so it is filtered out here
+    rather than skipped in the loop — otherwise the limit below would count
+    entries that never appear and quietly shorten the feed.
+    {%- endcomment -%}
+    {%- assign illustrated = site.recipes | where_exp: "r", "r.image" -%}
+    {%- assign recipes = illustrated | sort: "date" | reverse -%}
+    {%- assign limit = site.feed.pinterest_limit | default: 20 -%}
+
+    <title>{{ site.title | smartify | xml_escape }}</title>
+    <link>{{ '/' | absolute_url }}</link>
+    <description>{{ site.tagline | default: site.description | strip_newlines | strip | xml_escape }}</description>
+    <language>{{ site.lang | default: "en" }}</language>
+    <generator>Jekyll {{ jekyll.version }}</generator>
+    <atom:link href="{{ '/pinterest.xml' | absolute_url }}" rel="self" type="application/rss+xml" />
+
+    {%- comment -%}
+    The newest recipe's date, not the build time — a rebuild that changed
+    nothing should not look to Pinterest like the whole feed moved.
+    {%- endcomment -%}
+    {%- assign newest = recipes | first -%}
+    <lastBuildDate>{{ newest.date | default: site.time | date_to_rfc822 }}</lastBuildDate>
+
+    {%- for recipe in recipes limit: limit %}
+    {%- assign title = recipe.title | smartify | strip_html | normalize_whitespace | xml_escape %}
+    {%- assign pin_media = recipe.image | pin_image %}
+    {%- assign pin_url = pin_media | absolute_url %}
+    {%- assign page_url = recipe.url | absolute_url %}
+
+    {%- comment -%}
+    The caption. The description does the work; the tags follow because
+    Pinterest searches this text, and "braise", "beef" and "winter" are how
+    someone looks for this dish without knowing its name. Not hashtags —
+    Pinterest stopped treating those as links years ago, and they now read as
+    clutter — and not a bare list either, which after a full stop looks like
+    the keyword dump it is. "Filed under" is the site's own idiom for the same
+    thing, and a caption that reads as written is a caption people save.
+    {%- endcomment -%}
+    {%- capture caption -%}
+      {{- recipe.description | default: site.description | strip_html | normalize_whitespace | strip -}}
+      {%- if recipe.tags and recipe.tags.size > 0 %} Filed under {{ recipe.tags | join: ", " }}.{% endif -%}
+    {%- endcapture %}
+
+    <item>
+      <title>{{ title }}</title>
+      <link>{{ page_url }}</link>
+      <guid isPermaLink="true">{{ page_url }}</guid>
+      <pubDate>{{ recipe.date | date_to_rfc822 }}</pubDate>
+      <description>{{ caption | strip | xml_escape }}</description>
+
+      {%- for tag in recipe.tags %}
+      <category>{{ tag | xml_escape }}</category>
+      {%- endfor %}
+
+      {%- comment -%}
+      width and height are read off the file at build time. Pinterest uses them
+      to lay the pin out before it has fetched the bytes, and a feed that omits
+      them is a feed it has to guess about.
+      {%- endcomment -%}
+      <media:content url="{{ pin_url | xml_escape }}" medium="image" type="image/webp"
+                    width="{{ pin_media | image_width }}" height="{{ pin_media | image_height }}">
+        <media:title type="plain">{{ title }}</media:title>
+        <media:description type="plain">{{ caption | strip | xml_escape }}</media:description>
+      </media:content>
+      <media:thumbnail url="{{ pin_url | xml_escape }}" />
+
+      {%- assign bytes = pin_media | image_bytes %}
+      {%- if bytes %}
+      <enclosure url="{{ pin_url | xml_escape }}" length="{{ bytes }}" type="image/webp" />
+      {%- endif %}
+
+      {%- comment -%}
+      The headnote, with the pin image ahead of it — the same body /feed.xml
+      carries, and the last place a parser would look for an image if it
+      ignores both declarations above.
+      {%- endcomment -%}
+      <content:encoded><![CDATA[<p><img src="{{ pin_url }}" alt="{{ recipe.title | strip_html | normalize_whitespace }}" /></p>
+      {{ recipe.content | strip }}]]></content:encoded>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>
