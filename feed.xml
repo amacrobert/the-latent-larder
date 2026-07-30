@@ -1,0 +1,86 @@
+---
+# An Atom feed of the recipes.
+#
+# jekyll-feed is still in the plugin list and still writes the <link rel=
+# "alternate"> in <head> via {% feed_meta %}, but it no longer generates this
+# file: its generator skips any feed path that already exists in the source,
+# which is exactly what this is. That seam is why the plugin stays — the
+# alternative was configuring `feed.collections.recipes.path: /feed.xml`, and
+# that breaks. The plugin always builds a feed for `posts` too, this site has
+# no _posts, and `feed_meta` advertises whatever `feed.path` is — which tracks
+# posts, not collections. So the config route either collides two generated
+# pages on /feed.xml or points autodiscovery at the empty one.
+#
+# Before this file the feed had zero entries for the same underlying reason:
+# the plugin feeds `posts`, and every recipe is a collection document.
+layout: null
+sitemap: false
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  {%- assign recipes = site.recipes | sort: "date" | reverse -%}
+  {%- assign limit = site.feed.posts_limit | default: 20 -%}
+
+  <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml" />
+  <link href="{{ '/' | absolute_url }}" rel="alternate" type="text/html" />
+  <id>{{ '/feed.xml' | absolute_url }}</id>
+  <title type="html">{{ site.title | smartify | xml_escape }}</title>
+  <subtitle>{{ site.tagline | default: site.description | strip_newlines | strip | xml_escape }}</subtitle>
+
+  {%- comment -%}
+  Atom wants the feed's own last-changed time, not the build time. Using the
+  newest recipe's date means a rebuild that changes nothing does not tell every
+  reader the feed moved.
+  {%- endcomment -%}
+  {%- assign newest = recipes | first -%}
+  <updated>{{ newest.date | default: site.time | date_to_xmlschema }}</updated>
+
+  {%- comment -%}
+  Named here but deliberately not in _config.yml as `author:`, which
+  jekyll-seo-tag would turn into a schema.org Person. Atom requires an author
+  the feed can fall back on, and the larder is the thing publishing.
+  {%- endcomment -%}
+  <author><name>{{ site.title | xml_escape }}</name></author>
+
+  {%- for recipe in recipes limit: limit %}
+  {%- assign title = recipe.title | smartify | strip_html | normalize_whitespace | xml_escape %}
+  <entry>
+    <title type="html">{{ title }}</title>
+    <link href="{{ recipe.url | absolute_url }}" rel="alternate" type="text/html" title="{{ title }}" />
+    <published>{{ recipe.date | date_to_xmlschema }}</published>
+    <updated>{{ recipe.last_modified_at | default: recipe.date | date_to_xmlschema }}</updated>
+    <id>{{ recipe.id | absolute_url | xml_escape }}</id>
+
+    {%- if recipe.description and recipe.description != empty %}
+    <summary type="html"><![CDATA[{{ recipe.description | strip_html | normalize_whitespace }}]]></summary>
+    {%- endif %}
+
+    {%- comment -%}
+    The headnote only — not the ingredients and method, which live in front
+    matter rather than the body. Two reasons to leave them out: a reader that
+    already has the whole recipe has no reason to open the page, and those
+    fields are the structured data the recipe page and its schema own, so
+    flattening them into feed HTML would be a second copy to keep true.
+    {%- endcomment -%}
+    {%- capture body %}
+      {%- if recipe.image %}<p><img src="{{ recipe.image | absolute_url }}" alt="{{ title }}" /></p>{% endif %}
+      {{- recipe.content | strip -}}
+    {%- endcapture %}
+    {%- assign body = body | strip %}
+    {%- if body != empty %}
+    <content type="html" xml:base="{{ recipe.url | absolute_url | xml_escape }}"><![CDATA[{{ body }}]]></content>
+    {%- endif %}
+
+    {%- for tag in recipe.tags %}
+    <category term="{{ tag | xml_escape }}" />
+    {%- endfor %}
+
+    {%- assign image = recipe.image.path | default: recipe.image %}
+    {%- if image %}
+    {%- unless image contains "://" %}{% assign image = image | absolute_url %}{% endunless %}
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ image | xml_escape }}" />
+    {%- endif %}
+  </entry>
+  {%- endfor %}
+</feed>
