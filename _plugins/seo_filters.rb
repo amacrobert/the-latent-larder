@@ -36,6 +36,31 @@ module TheLatentLarder
       image_dimensions(path)&.last
     end
 
+    # The image a Pinterest save should use: the 2:3 "-tall" crop that
+    # bin/resize-recipe-image writes alongside the wide one. Pinterest lays its
+    # feed out in fixed-width columns, so a landscape photo takes a third of the
+    # height — and a third of the attention — of a portrait one.
+    #
+    # Falls back to the wide image when no crop has been made yet, so a recipe
+    # photographed before the crop existed still pins something rather than
+    # nothing.
+    def pin_image(path)
+      return nil if path.nil? || path.empty?
+
+      tall = path.sub(/(\.[^.\/]+)\z/, '-tall\1')
+      image_dimensions(tall) ? tall : path
+    end
+
+    # Size on disk, for the length attribute RSS requires on <enclosure>. Not
+    # optional in the spec, and a wrong number is worse than none: a reader that
+    # trusts it will stop reading the image short.
+    def image_bytes(path)
+      return nil if path.nil? || path.empty?
+
+      file = absolute_source_path(path)
+      File.file?(file) ? File.size(file) : nil
+    end
+
     private
 
     def duration_in_minutes(input)

@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+#
+# Make the published derivatives of a recipe photo.
+#
+# Usage:  bin/resize-recipe-image <Name>...     # named recipes
+#         bin/resize-recipe-image --all         # every photo in assets/images
+#
+# Two files come out of one source:
+#
+#   assets/images/<Name>.webp        the hero and card image, 1400px wide
+#   assets/images/<Name>-tall.webp   a 2:3 centre crop, for Pinterest
+#
+# Pinterest lays out its feed in columns of fixed width, so a pin is only as
+# prominent as it is tall. A 3:2 landscape photo takes barely a third of the
+# height a 2:3 one does at the same width, which is why the tall crop exists at
+# all — the page still shows the wide image, and only the pin uses this.
+#
+# The source is assets/images/originals/<Name>.png when that file is there, and
+# the published webp otherwise. That second case is for the recipes shot before
+# this script existed: their originals were never committed (originals/ is
+# gitignored), so the 1400px webp is the best source left. When that happens the
+# wide file is left exactly as it is rather than re-encoded — a second lossy
+# pass over an already lossy file buys nothing and costs detail.
+#
+# Requires cwebp and dwebp (both from libwebp).
+
+set -euo pipefail
+
+# 1400px covers the hero at 2x on the widest layout. 1000px is the width
+# Pinterest recommends for a 2:3 pin (1000x1500). Neither is ever exceeded, and
+# neither is ever reached by upscaling: a crop that comes out smaller is
+# published at its own size instead of being blown up into softness.
+wide_width=1400
+tall_width=1000
+quality="${LARDER_WEBP_QUALITY:-70}"
+
+die() { echo "resize-recipe-image: $*" >&2; exit 1; }
+
+for cmd in cwebp dwebp; do
+  command -v "$cmd" >/dev/null || die "$cmd is required but not installed"
+done
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+images="$root/assets/images"
+originals="$images/originals"
+
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+
+# A big-endian 32-bit integer at a byte offset. od rather than a language
+# runtime so this script keeps the same dependencies as the rest of bin/.
+be32() {
+  local hex
+  hex="$(od -An -tx1 -j"$2" -N4 "$1" | tr -d ' \n')"
+  echo $((16#$hex))
+}
+
+# PNG puts width and height in the IHDR chunk, at a fixed offset, always.
+png_size() {
+  [[ "$(od -An -tx1 -N4 "$1" | tr -d ' \n')" == "89504e47" ]] || die "not a PNG: $1"
+  echo "$(be32 "$1" 16) $(be32 "$1" 20)"
+}
+
+# Everything downstream reads PNG, so a webp source is decoded once here rather
+# than parsed in place: webp stores its dimensions three different ways
+# depending on the encoding, and cwebp would have to decode it anyway.
+as_png() {
+  local src="$1" out="$tmpdir/$(basename "${1%.*}").png"
+  case "$src" in
+    *.png) echo "$src" ;;
+    *.webp) dwebp -quiet "$src" -o "$out" || die "cannot decode $src"; echo "$out" ;;
+    *) die "unsupported source: $src" ;;
+  esac
+}
+
+encode() {
+  local src="$1" out="$2"; shift 2
+  cwebp -quiet -q "$quality" -metadata none "$@" "$src" -o "$out" \
+    || die "cwebp failed on $src"
+  printf '  %-28s %s\n' "$(basename "$out")" "$(du -h "$out" | cut -f1 | tr -d ' ')"
+}
+
+# The centre crop. Whichever dimension is proportionally too big gets trimmed
+# equally from both sides; the other is kept whole.
+tall_crop() {
+  local w="$1" h="$2" cw ch x y
+
+  if (( w * 3 > h * 2 )); then
+    ch=$h
+    cw=$(( (h * 2 + 1) / 3 ))
+  else
+    cw=$w
+    ch=$(( (w * 3 + 1) / 2 ))
+  fi
+
+  # Rounding up can overshoot the source by a pixel, which cwebp refuses.
+  (( cw > w )) && cw=$w
+  (( ch > h )) && ch=$h
+
+  x=$(( (w - cw) / 2 ))
+  y=$(( (h - ch) / 2 ))
+  echo "$x $y $cw $ch"
+}
+
+process() {
+  local name="$1"
+  local original="$originals/$name.png"
+  local wide="$images/$name.webp"
+  local tall="$images/$name-tall.webp"
+  local src
+
+  if [[ -f "$original" ]]; then
+    src="$original"
+  elif [[ -f "$wide" ]]; then
+    src="$wide"
+  else
+    die "no source for $name: neither $original nor $wide exists"
+  fi
+
+  echo "$name (from ${src#"$root"/})"
+
+  local png w h
+  png="$(as_png "$src")"
+  read -r w h <<<"$(png_size "$png")"
+
+  # The resize flags are held as a plain string and expanded unquoted so that
+  # "no resize needed" is simply the empty string. They only ever contain
+  # digits, so there is nothing for the word splitting to get wrong.
+  local resize
+
+  if [[ "$src" == "$original" ]]; then
+    resize=""
+    (( w > wide_width )) && resize="-resize $wide_width 0"
+    encode "$png" "$wide" $resize
+  else
+    echo "  (wide image kept as-is; no original to re-encode from)"
+  fi
+
+  local x y cw ch
+  read -r x y cw ch <<<"$(tall_crop "$w" "$h")"
+  resize=""
+  (( cw > tall_width )) && resize="-resize $tall_width 0"
+  encode "$png" "$tall" -crop "$x" "$y" "$cw" "$ch" $resize
+}
+
+names=()
+if [[ $# -eq 0 ]]; then
+  die "usage: $(basename "$0") <Name>... | --all"
+elif [[ "$1" == "--all" ]]; then
+  [[ $# -eq 1 ]] || die "--all takes no other arguments"
+  for f in "$images"/*.webp; do
+    [[ -f "$f" ]] || continue
+    local_name="$(basename "$f" .webp)"
+    # Skip the derivatives themselves, or every run would crop the last crop.
+    [[ "$local_name" == *-tall ]] && continue
+    names+=("$local_name")
+  done
+  [[ ${#names[@]} -gt 0 ]] || die "no images in $images"
+else
+  for name in "$@"; do
+    [[ "$name" =~ ^[A-Za-z0-9-]+$ ]] || die "name must be letters, digits and hyphens: $name"
+    names+=("$name")
+  done
+fi
+
+for name in "${names[@]}"; do
+  process "$name"
+done

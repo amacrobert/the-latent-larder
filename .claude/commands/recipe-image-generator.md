@@ -1,7 +1,7 @@
 ---
 description: Generate and attach photos for recipes that don't have one yet
 argument-hint: [optional recipe slug, e.g. "slow-lamb-shoulder-with-anchovy" — omit to do all of them]
-allowed-tools: Bash(./bin/recipes-without-images), Bash(./bin/generate-recipe-image:*), Bash(cwebp:*), Bash(ls:*), Bash(file:*), Read, Edit
+allowed-tools: Bash(./bin/recipes-without-images), Bash(./bin/generate-recipe-image:*), Bash(./bin/resize-recipe-image:*), Bash(dwebp:*), Bash(ls:*), Bash(file:*), Read, Edit
 ---
 
 # Shoot the missing recipe photos
@@ -97,22 +97,38 @@ Model, size and quality can be overridden with `OPENAI_IMAGE_MODEL`,
 `OPENAI_IMAGE_SIZE` and `OPENAI_IMAGE_QUALITY` if the user asks. Leave them
 alone otherwise.
 
-## Step 3 — Make the web version
+## Step 3 — Make the web versions
 
-The PNG is already in place from step 2. Convert it, exactly as `README.md`
-documents:
+The PNG is already in place from step 2. Convert it:
 
 ```bash
-cwebp -q 70 -resize 1400 0 -metadata none \
-  assets/images/originals/<Name>.png -o assets/images/<Name>.webp
+bin/resize-recipe-image <Name>
 ```
 
-The original PNG stays in `originals/` at full resolution — that's the archive
-(and it's gitignored), which is why `-resize` only ever touches the webp. Every
-published image in this repo is 1400px wide; `-resize 1400 0` keeps the aspect
-ratio. The webp should land somewhere around 200–250KB. If it's wildly bigger,
-nudge `-q` down; if it's tiny, the source was probably low-res and worth
-regenerating.
+The original PNG stays in `originals/` at full resolution — that's the archive,
+and it's gitignored, so nothing this step writes ever touches it. Two files come
+out, and both belong in the commit:
+
+* `assets/images/<Name>.webp` — 1400px wide, the hero and the card. Should land
+  somewhere around 200–250KB.
+* `assets/images/<Name>-tall.webp` — a 2:3 centre crop for Pinterest, which the
+  page references through `data-pin-media` but never displays.
+
+The script prints both sizes. If the wide one is wildly bigger than 250KB, nudge
+`LARDER_WEBP_QUALITY` down from 70; if it's tiny, the source was probably low-res
+and worth regenerating.
+
+Then **look at the tall crop**. It keeps the middle 2/3-by-height of a landscape
+photo, so a centred dish survives and an off-centre composition does not. Decode
+it and read it as an image:
+
+```bash
+dwebp -quiet assets/images/<Name>-tall.webp -o /tmp/<Name>-tall.png
+```
+
+If the crop has cut the dish in half or left the subject at the edge, the fix is
+the prompt, not the crop — go back to step 1 and describe the dish as centred in
+the frame, then regenerate. Don't hand-crop around a bad composition.
 
 ## Step 4 — Point the recipe at it
 

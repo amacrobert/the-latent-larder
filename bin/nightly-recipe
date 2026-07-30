@@ -9,7 +9,7 @@
 # under flock, so a slow run can never overlap the next one, and it commits
 # with git directly rather than asking Claude to do it.
 #
-# Requires: claude, git, cwebp, curl, jq — and OPENAI_API_KEY in the env file.
+# Requires: claude, git, cwebp, dwebp, curl, jq — and OPENAI_API_KEY in the env file.
 
 set -euo pipefail
 
@@ -75,7 +75,7 @@ fi
 
 [[ -n "${OPENAI_API_KEY:-}" ]] || die "OPENAI_API_KEY not set by $env_file"
 
-for cmd in claude git cwebp curl jq; do
+for cmd in claude git cwebp dwebp curl jq; do
   command -v "$cmd" >/dev/null || die "$cmd not found on PATH ($PATH)"
 done
 

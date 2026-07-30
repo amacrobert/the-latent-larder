@@ -93,16 +93,40 @@ Put the web-ready file in `assets/images/` and reference it from the site root,
 e.g. `/assets/images/focaccia.webp`.
 
 Keep full-size originals in `assets/images/originals/`, which is gitignored and
-excluded from the build. To make a web version from one:
+excluded from the build. To make the web versions from one:
 
 ```bash
-cwebp -q 70 -resize 1400 0 -metadata none \
-  assets/images/originals/My-Recipe.png -o assets/images/My-Recipe.webp
+bin/resize-recipe-image My-Recipe
 ```
+
+That writes two files, and both are published:
+
+| File | Size | Used by |
+|---|---|---|
+| `My-Recipe.webp` | 1400px wide | the hero and the card |
+| `My-Recipe-tall.webp` | 2:3 centre crop, up to 1000px wide | Pinterest |
 
 1400px covers the hero at 2x on the widest layout. It matters more than it
 looks: the source PNGs are ~2.8 MB each, which would make the home page 5.6 MB;
 as WebP they are ~230 KB and the page is 0.61 MB.
+
+The tall crop never appears on the site. Pinterest lays its feed out in columns
+of a fixed width, so how much of it a pin occupies is decided entirely by the
+pin's aspect ratio — a 3:2 landscape photo gets a third of the height, and a
+third of the attention, of a 2:3 portrait one. The `data-pin-media` attribute on
+each `<img>` points Pinterest's save button at the crop, so a reader saving the
+recipe gets the tall version without the page ever showing it.
+
+The crop is taken from the centre, which suits how these photos are shot —
+overhead bowls and centred dishes survive losing their outer thirds. A composed
+shot with something at one edge will not. Check the crop before committing, and
+if it has cut off the point of the picture, reshoot the photo composed for it
+rather than trying to salvage the crop.
+
+`bin/resize-recipe-image --all` rebuilds every derivative. Photos shot before the
+crop existed have no original left to work from, so their tall crop comes from
+the published 1400px WebP and their wide file is left untouched rather than put
+through a second lossy pass.
 
 ## Layout of the repo
 
@@ -120,6 +144,7 @@ as WebP they are ~230 KB and the page is 0.61 MB.
 | `assets/main.scss` | the entire stylesheet |
 | `assets/fonts/` | self-hosted Fraunces + Source Sans 3 |
 | `_config.yml` | site metadata, collection config, colophon |
+| `bin/resize-recipe-image` | the published WebP derivatives, wide and tall |
 
 There is no theme gem — the layouts and CSS are self-contained, so nothing
 overrides anything and every rule is in `assets/main.scss`.

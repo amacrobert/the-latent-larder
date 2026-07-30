@@ -66,6 +66,19 @@ layout: default
     them the browser reserves no space, and every recipe shoves its own
     ingredients down the page the moment the photo arrives.
   {%- endcomment -%}
+  {%- comment -%}
+    The data-pin-* attributes are read by Pinterest's save button and browser
+    extension. Left alone it would pin this wide photo at whatever it finds on
+    the page, which lands in the feed as a short, easily scrolled-past strip;
+    data-pin-media points it at the 2:3 crop instead. The other two stop the
+    pin from being anonymous — without data-pin-url a save made from a
+    syndicated copy links wherever it was found, and without a description
+    Pinterest falls back to the alt text, which is only the title.
+  {%- endcomment -%}
+  {%- assign pin_media = page.image | pin_image -%}
+  {%- capture pin_description -%}
+    {{- page.title }}{% if page.description %} — {{ page.description }}{% endif -%}
+  {%- endcapture -%}
   <div class="wrap wrap--narrow">
     <img class="recipe__image"
          src="{{ page.image | relative_url }}"
@@ -73,7 +86,10 @@ layout: default
          width="{{ page.image | image_width }}"
          height="{{ page.image | image_height }}"
          fetchpriority="high"
-         decoding="async">
+         decoding="async"
+         data-pin-media="{{ pin_media | absolute_url }}"
+         data-pin-url="{{ page.url | absolute_url }}"
+         data-pin-description="{{ pin_description | escape }}">
   </div>
   {%- endif %}
 

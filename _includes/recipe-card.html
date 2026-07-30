@@ -35,9 +35,23 @@
       alt="" on purpose: the anchor already carries the recipe title, so a
       described thumbnail just makes a screen reader say the name twice.
     {%- endcomment -%}
+    {%- comment -%}
+      Same Pinterest attributes as the hero, because these thumbnails are just
+      as pinnable and rather more likely to be: a reader browsing the index is
+      exactly who saves for later. Without them a save from here pins a 4:3
+      thumbnail pointing at the home page, which is the wrong image and the
+      wrong destination.
+    {%- endcomment -%}
+    {%- assign pin_media = recipe.image | pin_image -%}
+    {%- capture pin_description -%}
+      {{- recipe.title }}{% if recipe.description %} — {{ recipe.description }}{% endif -%}
+    {%- endcapture -%}
     <span class="card__photo">
       <img src="{{ recipe.image | relative_url }}" alt="" loading="lazy" decoding="async"
-           width="{{ recipe.image | image_width }}" height="{{ recipe.image | image_height }}">
+           width="{{ recipe.image | image_width }}" height="{{ recipe.image | image_height }}"
+           data-pin-media="{{ pin_media | absolute_url }}"
+           data-pin-url="{{ recipe.url | absolute_url }}"
+           data-pin-description="{{ pin_description | escape }}">
     </span>
     {%- endif %}
 
