@@ -1,0 +1,50 @@
+{%- comment -%}
+  The links between pages of a recipe list. Usage:
+
+    {% include pagination.html pagination=page.pagination label="Recipe pages" %}
+
+  Renders nothing at all when everything fits on one page, which is the case
+  for every tag today — the markup should appear when there is somewhere to go,
+  not sit there greyed out on a list of nine.
+
+  Numbered links rather than only Newer/Older, because a crawler follows links
+  and will not click "Older" forty times: every page of the list is one hop from
+  every other. The full range is printed with no ellipsis, which is right while
+  the count is small; at one recipe a day this reaches ten pages around 2028,
+  and that is the point to window it.
+
+  "Newer" and "Older" rather than "Previous" and "Next": the lists are sorted by
+  date, so that is what the two directions actually mean. They stay in the
+  markup as spans when there is nowhere to go, so the numbers keep their place
+  on the row instead of sliding sideways between pages.
+{%- endcomment -%}
+{%- assign pages = include.pagination -%}
+{%- if pages.total_pages > 1 %}
+<nav class="pagination" aria-label="{{ include.label | default: 'Pages' }}">
+
+  {%- if pages.previous_path %}
+  <a class="pagination__step" rel="prev" href="{{ pages.previous_path | relative_url }}">Newer</a>
+  {%- else %}
+  <span class="pagination__step is-off" aria-hidden="true">Newer</span>
+  {%- endif %}
+
+  <ol class="pagination__pages">
+    {%- for entry in pages.pages %}
+    <li>
+      {%- if entry.current -%}
+      <span aria-current="page">{{ entry.number }}</span>
+      {%- else -%}
+      <a href="{{ entry.path | relative_url }}" aria-label="Page {{ entry.number }} of {{ pages.total_pages }}">{{ entry.number }}</a>
+      {%- endif -%}
+    </li>
+    {%- endfor %}
+  </ol>
+
+  {%- if pages.next_path %}
+  <a class="pagination__step" rel="next" href="{{ pages.next_path | relative_url }}">Older</a>
+  {%- else %}
+  <span class="pagination__step is-off" aria-hidden="true">Older</span>
+  {%- endif %}
+
+</nav>
+{%- endif %}

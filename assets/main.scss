@@ -839,6 +839,73 @@ h1, h2, h3, h4 {
   }
 }
 
+/* --- Pagination ----------------------------------------------------------
+   Built from the same chip as the tags, because it is the same gesture: a
+   small, round, bordered thing you press to go somewhere. Two components that
+   look almost alike read as a mistake; two that look identical read as a
+   system. ------------------------------------------------------------------ */
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+}
+
+.pagination__pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--clay-deep);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pagination a {
+  &:hover,
+  &:focus-visible {
+    color: var(--accent-deep);
+    border-color: var(--accent);
+    background: var(--accent-tint);
+  }
+}
+
+/* Where you already are: filled rather than outlined, so the current page is
+   findable in the row without reading every number. */
+.pagination [aria-current="page"] {
+  color: var(--accent-deep);
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  font-weight: 600;
+}
+
+/* The end of the list in one direction. Kept in the flow so the numbers do not
+   shift sideways between the first page and the second. */
+.pagination .is-off {
+  color: var(--ink-faint);
+  border-color: var(--clay);
+  opacity: 0.6;
+}
+
 /* --- Page ---------------------------------------------------------------- */
 
 .page { padding-block: clamp(1rem, 3vw, 2rem) 0; }

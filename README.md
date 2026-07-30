@@ -154,6 +154,30 @@ It carries the 20 most recent recipes; raise `feed.pinterest_limit` in
 `_config.yml` to backfill more. Only recipes with a photo appear, since a pin
 without an image is not a pin.
 
+### Pagination
+
+The home page and every tag page split at `paginate` cards, set to 60 in
+`_config.yml`. Page one keeps the list's own URL and the rest hang off it:
+
+```
+/              /page/2/              /page/3/
+/recipes/tag/main/    /recipes/tag/main/page/2/
+```
+
+Two URLs for one page of results would be a duplicate, so there is no
+`/page/1/`. Continuation pages get their own `<title>` and canonical, and drop
+the home page's intro paragraph — they are the list continued, not a second
+front door. The tag cloud stays on every page, since it is how a crawler gets
+sideways.
+
+`_plugins/pagination.rb` does the splitting for both, and templates read
+`page.pagination`. It is not jekyll-paginate: that gem only paginates `posts`,
+and every recipe here is a collection document — the same mismatch that left
+`/feed.xml` empty before it was written by hand.
+
+Only the home page is long enough to split today. The tag pages use the same
+code and the same page size, so the largest tag paginates the day it passes 60.
+
 ## Layout of the repo
 
 | Path | Purpose |
@@ -166,7 +190,10 @@ without an image is not a pin.
 | `_layouts/recipe.html` | the recipe page type |
 | `_layouts/page.html` | plain pages like About |
 | `_includes/recipe-card.html` | the index card on the home page |
+| `_includes/pagination.html` | the links between pages of a recipe list |
 | `_includes/illo.html` | the hand-drawn marks (`thyme`, `whisk`, `butter`, `wheat`, `bowl`, `spoon`) |
+| `_plugins/pagination.rb` | splits the home page and the tag pages into pages |
+| `_plugins/tag_pages.rb` | a page per tag, generated from what the recipes declare |
 | `assets/main.scss` | the entire stylesheet |
 | `assets/fonts/` | self-hosted Fraunces + Source Sans 3 |
 | `_config.yml` | site metadata, collection config, colophon |

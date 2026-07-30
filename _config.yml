@@ -44,6 +44,11 @@ defaults:
       seo:
         type: WebPage
 
+# How many recipe cards a list page holds before it splits, on the home page
+# and on each tag page alike. Read by _plugins/pagination.rb — jekyll-paginate
+# is not installed, and would only ever paginate `posts` if it were.
+paginate: 60
+
 # Pages listed in the site header, in order.
 header_pages:
   - about.md

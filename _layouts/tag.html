@@ -17,11 +17,17 @@ layout: default
     <span></span>
   </div>
 
+  {%- comment -%}
+  page.recipes is every recipe under the tag — the standfirst above counts them
+  all. This loop takes only the slice belonging to this page.
+  {%- endcomment -%}
   <ul class="cards">
-    {%- for recipe in page.recipes -%}
+    {%- for recipe in page.pagination.items -%}
       {% include recipe-card.html recipe=recipe index=forloop.index0 %}
     {%- endfor -%}
   </ul>
+
+  {% include pagination.html pagination=page.pagination label="Pages of this tag" %}
 
   {%- comment -%}
   Sideways links between tag pages. A crawler arriving on one tag can reach

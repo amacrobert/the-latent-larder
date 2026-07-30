@@ -30,8 +30,21 @@ module TheLatentLarder
         }
       end
 
+      per_page = Pagination.per_page(site)
+
       tags.each do |slug, group|
-        site.pages << TagPage.new(site, slug, group[:name], group[:recipes])
+        recipes = group[:recipes]
+        base    = "/#{BASE}/#{slug}/"
+
+        # A tag with more recipes than fit on a page splits the same way the
+        # home page does, and for the same reason: 60 cards is already a long
+        # scroll, and each one carries a photo.
+        (1..Pagination.total_pages(recipes, per_page)).each do |number|
+          site.pages << TagPage.new(
+            site, slug, group[:name], recipes, number,
+            Pagination.build(recipes, per_page, number, base)
+          )
+        end
       end
 
       site.pages << TagIndexPage.new(site) unless tags.empty?
@@ -54,7 +67,7 @@ module TheLatentLarder
         end
       end
 
-      tags.each_value { |g| g[:recipes].sort_by! { |d| d.data["date"] }.reverse! }
+      tags.each_value { |g| g[:recipes] = Pagination.by_date_desc(g[:recipes]) }
 
       # Biggest tags first: the lists these feed are meant to be entry points,
       # and a tag with one recipe behind it is a worse door than "main" with
@@ -65,23 +78,31 @@ module TheLatentLarder
   end
 
   class TagPage < Jekyll::Page
-    def initialize(site, slug, name, recipes)
+    def initialize(site, slug, name, recipes, number, pagination)
       @site = site
       @base = site.source
       @dir  = File.join(TagPageGenerator::BASE, slug)
+      # Page one keeps the tag's own URL; the rest hang off it. Same shape as
+      # the home page's continuations.
+      @dir  = File.join(@dir, "page", number.to_s) if number > 1
       @name = "index.html"
 
       process(@name)
 
       count = recipes.length
       noun  = count == 1 ? "recipe" : "recipes"
+      title = "#{titleize(name)} recipes"
+      title = "#{title}, page #{number}" if number > 1
 
       self.data = {
         "layout"       => "tag",
         "tag"          => name,
         "tag_slug"     => slug,
+        # The whole set, not this page's slice — the standfirst counts every
+        # recipe under the tag however many pages it takes to list them.
         "recipes"      => recipes,
-        "title"        => "#{titleize(name)} recipes",
+        "pagination"   => pagination,
+        "title"        => title,
         "description"  => "#{count} #{noun} tagged #{name} in The Latent Larder — " \
                           "ingredients, method, and the notes that matter.",
         # These pages are indexable and useful, but they are lists of links,

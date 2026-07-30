@@ -4,7 +4,12 @@ layout: default
 
 <div class="wrap">
 
-  {%- if content != "" %}
+  {%- comment -%}
+  The intro belongs to page one. Page two is the same list continued, not a
+  second front door, and repeating the blurb at /page/2/ would put the only
+  prose on the site's most important page at two URLs.
+  {%- endcomment -%}
+  {%- if content != "" and page.pagination.page == 1 %}
   <div class="intro">{{ content }}</div>
   {%- endif %}
 
@@ -36,7 +41,16 @@ layout: default
   </nav>
   {%- endif %}
 
-  {%- assign recipes = site.recipes | sort: "date" | reverse -%}
+  {%- comment -%}
+  The slice for this page, and the order, both come from _plugins/pagination.rb
+  rather than being sorted here — the split has to be made in one place or two
+  pages of the list can disagree about where the boundary falls.
+
+  `index` restarts at 0 on every page on purpose. It drives the card's tilt and
+  its staggered entrance, and a page-two card should be the third card in, not
+  the sixty-third.
+  {%- endcomment -%}
+  {%- assign recipes = page.pagination.items -%}
   {%- if recipes.size > 0 -%}
     <h2 class="section-heading">{{ page.list_title | default: "Recipes" }}</h2>
     <ul class="cards">
@@ -44,6 +58,7 @@ layout: default
         {% include recipe-card.html recipe=recipe index=forloop.index0 %}
       {%- endfor -%}
     </ul>
+    {% include pagination.html pagination=page.pagination label="Recipe pages" %}
   {%- else -%}
     <p class="empty">Nothing in the larder yet. Add a Markdown file to <code>_recipes/</code>.</p>
   {%- endif -%}
