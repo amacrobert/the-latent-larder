@@ -3,6 +3,17 @@
 <meta name="theme-color" content="#f4ecdd">
 
 {%- comment -%}
+Icons. The SVG is the one that matters and every current browser prefers it;
+favicon.ico is the fallback the older ones and most feed readers and link
+unfurlers ask for at the root whether or not it is declared here. The Apple
+icon is a separate file because iOS wants square corners and no transparency
+— it masks the artwork itself, and rounds an already-rounded icon twice.
+{%- endcomment -%}
+<link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+
+{%- comment -%}
 jekyll-seo-tag has no robots directive of its own, so pages that should stay
 out of the index (the 404, for one) declare it in their own front matter.
 {%- endcomment -%}
