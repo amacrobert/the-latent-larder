@@ -40,5 +40,3 @@ method:
 The overnight chill isn't just for flavor — this dough is heavy with butter and eggs, and it's too soft to roll or twist straight after kneading. Cold, it holds its shape long enough to spread, roll, and cut without the filling squeezing out the sides. Use bittersweet chocolate, not milk; the dough is sweet enough on its own, and the loaf needs the bitterness to keep it from tasting like cake.
 
 Wrapped well, a whole loaf keeps at room temperature for three days and freezes for a month, sliced or whole. Day-old babka is better toasted in butter than eaten plain — the crumb firms up overnight, and a hot pan brings the chocolate back to melting.
-</content>
-</invoke>

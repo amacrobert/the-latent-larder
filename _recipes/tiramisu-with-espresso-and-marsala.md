@@ -32,4 +32,3 @@ method:
 Cooking the yolks over a double boiler does two jobs at once: it takes the raw egg off the table, and it thickens the base enough that the layers hold their shape when you cut into them instead of sliding apart. Don't rush the dip on the ladyfingers, either — a full second per side is plenty. Any longer and you're serving espresso soup with a spoon.
 
 No Marsala in the cabinet is no problem; coffee liqueur works the same way, and leaving it out entirely just makes for a straighter shot of coffee flavor. This is one of the few desserts that actually wants the extra day — the ladyfingers keep softening and the layers keep settling into each other, so if you can stand to wait, do.
-</content>
