@@ -30,15 +30,116 @@ ingredient, a technique, or a course the collection doesn't have yet over a
 third variation on what's already there, and vary the effort level — if the
 larder is all quick sides, write something slow.
 
+### Mass appeal
+
+There's a fourth axis, and it pulls the other way: **how many people actually
+want to cook this**. The first three keep the larder varied; this one keeps it
+useful. A collection that is all guanciale and dashi is a collection nobody
+cooks from.
+
+The buckets that carry real, recurring volume:
+
+- **Weeknight dinners and 30-minute meals.** The largest evergreen category by
+  far, because it's a need that recurs every week rather than an aspiration.
+- **Chicken.** The most-searched protein, and breasts, thighs, and wings each
+  hold up their own subcategory.
+- **Ground beef and budget dinners.** High demand, and thinly served — the
+  aspirational end of food writing mostly ignores it.
+- **Pasta.** Near-universal, endlessly variable, and it photographs well.
+- **Desserts and baking.** Cookies, brownies, banana bread. Huge, with sharp
+  seasonal spikes.
+
+Two framings cut across all of those and are closer to how people actually
+search:
+
+- **Appliance or vessel.** Air fryer, slow cooker, Instant Pot, sheet pan,
+  one pot. "Air fryer chicken thighs" pulls harder than "chicken thighs."
+- **Occasion.** Holiday tentpoles (Thanksgiving sides, Christmas cookies, Super
+  Bowl dips), party appetizers, potluck dishes. Spiky, but enormous when they
+  spike.
+
+On dietary framing: high-protein is currently the strongest, vegetarian and
+gluten-free are stable, keto is well past its peak. Use it as a frame on a dish
+that stands up on its own, never as the reason for the dish.
+
+Weigh this against the gap-filling instinct rather than letting either win
+outright. If the last several recipes have been narrow — an unusual cut, an
+imported ingredient, a two-day project — take the high-appeal option this time.
+If the larder is already ten chicken traybakes deep, the appeal argument has
+been made and you can go somewhere stranger. A high-appeal dish still has to
+clear the distinctness bar above; volume is not a licence to write the same
+sheet-pan chicken twice.
+
+## The title
+
+The title is the recipe's whole surface area — it's the card, the search
+result, and the thing someone repeats to a friend. Write it deliberately.
+
+**Keep an intact, searchable core phrase.** The core is the thing a person
+would actually type: "chicken thighs," "banana bread," "lentil soup."
+Modifiers wrap around that phrase; they never replace it. "Chicken Thighs" can
+become "Crispy Skillet Chicken Thighs in Garlic Butter." It must not become
+"Weeknight Wonder."
+
+**Prefer modifiers that carry information.** Texture (crispy, silky, fudgy),
+technique (skillet, braised, no-knead), a defining ingredient (brown butter,
+gochujang, lemon-dill), or a real constraint (one-pan, 20-minute,
+freezer-friendly). Each modifier should tell the reader something they'd
+otherwise have to open the recipe to learn.
+
+**Ban empty superlatives.** Never *ultimate*, *best-ever*, *amazing*,
+*delicious*, *mouthwatering*, *to-die-for*, *game-changing*, or *secret*. They
+describe the writer's enthusiasm, not the food.
+
+**Two modifiers maximum, and keep the title under about 60 characters.** A
+third modifier is the ingredient list leaking into the title.
+
+**Every modifier must be true of the recipe as written.** If nothing gets
+browned, it isn't "caramelized." If it uses two pans, it isn't "one-pan." If
+the total time is 35 minutes, it isn't "20-minute."
+
+Before and after:
+
+| Bare | Titled |
+| --- | --- |
+| Chicken Thighs | Crispy Skillet Chicken Thighs in Garlic Butter |
+| Baked Ziti | One-Pan Baked Ziti with Hot Sausage |
+| Banana Bread | Brown Butter Banana Bread with Walnuts |
+| Chili | 30-Minute Ground Beef Chili |
+| Pulled Pork | Slow Cooker Pulled Pork with Cider Vinegar |
+| Brownies | Fudgy Espresso Brownies |
+| Roasted Carrots | Sheet-Pan Roasted Carrots with Honey Butter |
+| Lentil Soup | Smoky Red Lentil Soup with Lemon |
+
+Reject these:
+
+- *The Ultimate Chicken Thighs* — "ultimate" is an empty superlative and says
+  nothing about how the dish is cooked or what it tastes like.
+- *Weeknight Wonder* — the core phrase is gone. Nobody searches for it, and
+  nobody can tell what they'd be eating.
+- *Grandma's Sunday Sauce* — nostalgia in place of a dish. "Sauce" isn't a
+  searchable core, and the modifier carries no information about the food.
+- *Easy Delicious Amazing Pasta Bake* — three empties stacked in front of a
+  perfectly good core phrase.
+- *Crispy Caramelized Miso-Butter Sheet-Pan Chicken Thighs* — over the
+  two-modifier cap; the title is now doing the ingredient list's job.
+- *Slow-Braised Short Ribs with Red Wine, Star Anise, and Orange Zest* — 66
+  characters, and it truncates on the card before it reaches the point.
+- *Caramelized Leek Tart* on a recipe where the leeks are sweated in butter
+  and never take on colour — the modifier is simply false.
+
 Create exactly one file: `_recipes/<slug>.md`. The filename becomes the URL, so
 use lowercase words separated by hyphens (`_recipes/braised-white-beans.md` →
-`/recipes/braised-white-beans/`). Do not touch any other file.
+`/recipes/braised-white-beans/`). Do not touch any other file. The slug is
+allowed to be shorter than the title — build it from the core phrase plus at
+most one modifier, and drop the rest. "Brown Butter Banana Bread with Walnuts"
+becomes `brown-butter-banana-bread.md`.
 
 ## The file
 
 ```yaml
 ---
-title: Braised White Beans
+title: Slow-Braised White Beans with Lemon
 date: <the full timestamp from above, copied exactly>
 description: One dry, concrete line. What it is and why you'd make it.
 servings: 4
