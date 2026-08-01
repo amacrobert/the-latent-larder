@@ -2,6 +2,7 @@
 title: Sticky Orange Chicken with Scallions
 date: 2026-08-01 07:30:03 -0400
 description: Cornstarch-dredged chicken thighs fried until the crust holds, then tossed in an orange glaze that turns sticky in under two minutes.
+image: /assets/images/Sticky-Orange-Chicken.webp
 servings: 4
 prep_time: 20 min
 cook_time: 15 min

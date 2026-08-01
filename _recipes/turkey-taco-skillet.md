@@ -2,6 +2,7 @@
 title: One-Pan Turkey Taco Skillet
 date: 2026-08-01 00:00:03 -0400
 description: Ground turkey, rice, and black beans simmered in taco spices and finished with melted cheddar — one skillet, no sides required.
+image: /assets/images/Turkey-Taco-Skillet.webp
 servings: 4
 prep_time: 10 min
 cook_time: 25 min

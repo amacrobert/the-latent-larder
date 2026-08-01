@@ -2,6 +2,7 @@
 title: Stovetop Queso with Pickled Jalapeños
 date: 2026-08-01 05:30:03 -0400
 description: Melted cheese, canned tomatoes, and pickled heat — ready before the chips run out.
+image: /assets/images/Stovetop-Queso-With-Pickled-Jalapenos.webp
 servings: 6
 prep_time: 10 min
 cook_time: 15 min

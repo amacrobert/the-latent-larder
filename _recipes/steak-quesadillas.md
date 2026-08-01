@@ -2,6 +2,7 @@
 title: Skillet Steak Quesadillas with Pepper Jack
 date: 2026-08-01 02:30:03 -0400
 description: Seared skirt steak and melted pepper jack folded into a charred flour tortilla, ready before the rice even finishes.
+image: /assets/images/Steak-Quesadillas.webp
 servings: 4
 prep_time: 15 min
 cook_time: 15 min
