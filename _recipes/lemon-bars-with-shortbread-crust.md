@@ -2,6 +2,7 @@
 title: Lemon Bars with Shortbread Crust
 date: 2026-08-01 00:30:03 -0400
 description: A blind-baked shortbread base under a puckery custard, cut into squares that hold their shape at room temperature.
+image: /assets/images/Lemon-Bars-With-Shortbread-Crust.webp
 servings: 16 bars
 prep_time: 20 min
 cook_time: 40 min

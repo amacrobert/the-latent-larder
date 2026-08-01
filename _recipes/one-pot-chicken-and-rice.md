@@ -2,6 +2,7 @@
 title: One-Pot Chicken and Rice with Lemon
 date: 2026-07-31 22:30:02 -0400
 description: Chicken thighs seared for color, then the rice finishes cooking in the same skillet in the drippings and stock.
+image: /assets/images/One-Pot-Chicken-And-Rice-With-Lemon.webp
 servings: 4
 prep_time: 10 min
 cook_time: 35 min

@@ -2,6 +2,7 @@
 title: Silky Hummus with Brown Butter and Pine Nuts
 date: 2026-08-01 07:00:02 -0400
 description: Canned chickpeas simmered until their skins slip off, blitzed past the point most home hummus stops, then pooled with butter browned until it smells nutty.
+image: /assets/images/Silky-Hummus-With-Brown-Butter-And-Pine-Nuts.webp
 servings: 6
 prep_time: 15 min
 cook_time: 15 min

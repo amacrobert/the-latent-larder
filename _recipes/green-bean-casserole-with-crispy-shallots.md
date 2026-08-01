@@ -2,6 +2,7 @@
 title: Green Bean Casserole with Crispy Shallots
 date: 2026-08-01 02:00:03 -0400
 description: The Thanksgiving standby rebuilt without a can of soup — real mushroom cream sauce under shallots fried crisp instead of tinned.
+image: /assets/images/Green-Bean-Casserole-With-Crispy-Shallots.webp
 servings: 6
 prep_time: 25 min
 cook_time: 35 min

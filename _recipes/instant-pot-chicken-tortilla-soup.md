@@ -2,6 +2,7 @@
 title: Instant Pot Chicken Tortilla Soup with Avocado and Lime
 date: 2026-08-01 09:00:03 -0400
 description: Shredded chicken in a smoky chipotle-tomato broth, pressure-cooked in minutes and finished with tortilla strips fried crisp instead of the soggy kind you get elsewhere.
+image: /assets/images/Instant-Pot-Chicken-Tortilla-Soup-With-Avocado-And-Lime.webp
 servings: 6
 prep_time: 15 min
 cook_time: 30 min

@@ -2,6 +2,7 @@
 title: Baked Meatball Subs with Melted Provolone
 date: 2026-08-01 04:30:02 -0400
 description: Pan-browned beef meatballs simmered in tomato sauce, piled into rolls, and run under the broiler until the provolone blisters.
+image: /assets/images/Baked-Meatball-Subs-With-Melted-Provolone.webp
 servings: 4
 prep_time: 20 min
 cook_time: 35 min

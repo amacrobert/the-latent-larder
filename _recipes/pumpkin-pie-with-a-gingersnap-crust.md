@@ -2,6 +2,7 @@
 title: Pumpkin Pie with a Gingersnap Crust
 date: 2026-08-01 06:30:03 -0400
 description: A custard pie in a spiced cookie-crumb shell, baked just until the center still holds a slow wobble.
+image: /assets/images/Pumpkin-Pie-With-A-Gingersnap-Crust.webp
 servings: 8
 prep_time: 20 min
 cook_time: 55 min

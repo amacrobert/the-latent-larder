@@ -2,6 +2,7 @@
 title: Crispy Sheet-Pan Broccoli with Garlic and Parmesan
 date: 2026-07-31 22:00:02 -0400
 description: Broccoli roasted hot and fast on a preheated pan until the edges char, then finished with garlic, parmesan, and lemon.
+image: /assets/images/Crispy-Sheet-Pan-Broccoli-With-Garlic-And-Parmesan.webp
 servings: 4
 prep_time: 10 min
 cook_time: 18 min

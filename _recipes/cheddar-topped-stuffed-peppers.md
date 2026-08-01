@@ -2,6 +2,7 @@
 title: Cheddar-Topped Stuffed Peppers with Ground Beef and Rice
 date: 2026-08-01 08:00:03 -0400
 description: Bell peppers packed with a simmered beef and rice filling, baked until tender, then finished under melted cheddar.
+image: /assets/images/Cheddar-Topped-Stuffed-Peppers-With-Ground-Beef-And-Rice.webp
 servings: 4
 prep_time: 20 min
 cook_time: 45 min

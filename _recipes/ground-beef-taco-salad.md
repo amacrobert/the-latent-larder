@@ -2,6 +2,7 @@
 title: Ground Beef Taco Salad with Cumin-Lime Crema
 date: 2026-08-01 04:00:03 -0400
 description: Browned beef and crushed tortilla chips over crisp romaine, pulled together with a tangy cumin-lime crema instead of a bottled dressing.
+image: /assets/images/Ground-Beef-Taco-Salad-With-Cumin-Lime-Crema.webp
 servings: 4
 prep_time: 15 min
 cook_time: 15 min

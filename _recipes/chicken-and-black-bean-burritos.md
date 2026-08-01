@@ -2,6 +2,7 @@
 title: Crispy Chicken and Black Bean Burritos
 date: 2026-08-01 03:30:02 -0400
 description: Chili-rubbed chicken thighs, lime rice, and black beans rolled tight and browned seam-down until the tortilla holds its own shape.
+image: /assets/images/Crispy-Chicken-And-Black-Bean-Burritos.webp
 servings: 4
 prep_time: 15 min
 cook_time: 20 min

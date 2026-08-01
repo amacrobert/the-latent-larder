@@ -2,6 +2,7 @@
 title: Sausage and Herb Bread Stuffing
 date: 2026-07-31 23:30:04 -0400
 description: Cubed bread dried out and soaked in sausage fat and stock, baked until the top shatters and the center stays custardy.
+image: /assets/images/Sausage-And-Herb-Bread-Stuffing.webp
 servings: 8
 prep_time: 20 min
 cook_time: 50 min

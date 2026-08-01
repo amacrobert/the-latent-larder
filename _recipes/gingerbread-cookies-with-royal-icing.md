@@ -2,6 +2,7 @@
 title: Gingerbread Cookies with Royal Icing
 date: 2026-08-01 05:00:02 -0400
 description: Rolled, cut, and spiced with a full spoon of ginger — sturdy enough to hold a shape and pipe icing over.
+image: /assets/images/Gingerbread-Cookies-With-Royal-Icing.webp
 servings: 24
 prep_time: 30 min
 cook_time: 10 min

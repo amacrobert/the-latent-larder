@@ -2,6 +2,7 @@
 title: Slow Cooker Pulled Pork with Carolina Vinegar Sauce
 date: 2026-07-31 21:30:03 -0400
 description: Pork shoulder cooked low until it falls apart, then tossed in a sharp, peppery vinegar sauce instead of something sweet and sticky.
+image: /assets/images/Slow-Cooker-Pulled-Pork-With-Carolina-Vinegar-Sauce.webp
 servings: 8
 prep_time: 15 min
 cook_time: 8 hours

@@ -2,6 +2,7 @@
 title: Skillet Philly Cheesesteaks with Provolone
 date: 2026-08-01 01:30:02 -0400
 description: Shaved ribeye griddled fast and hot with peppers and onions, piled into a toasted roll under melted provolone before anything has a chance to steam.
+image: /assets/images/Skillet-Philly-Cheesesteaks-With-Provolone.webp
 servings: 4
 prep_time: 20 min
 cook_time: 15 min

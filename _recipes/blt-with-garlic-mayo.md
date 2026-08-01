@@ -2,6 +2,7 @@
 title: BLT with Thick-Cut Bacon and Garlic Mayo
 date: 2026-08-01 03:00:03 -0400
 description: Six strips of bacon fried hard, cold lettuce, salted tomato, and a garlic mayo that earns the sandwich its name.
+image: /assets/images/BLT-With-Thick-Cut-Bacon-And-Garlic-Mayo.webp
 servings: 2
 prep_time: 10 min
 cook_time: 10 min

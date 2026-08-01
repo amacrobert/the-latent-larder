@@ -2,6 +2,7 @@
 title: Crumb-Topped Blueberry Muffins
 date: 2026-07-31 23:00:02 -0400
 description: Domed muffins started in a hot oven so they rise before the blueberries can drag them down, finished with a crunchy streusel crust.
+image: /assets/images/Crumb-Topped-Blueberry-Muffins.webp
 servings: 12
 prep_time: 20 min
 cook_time: 22 min

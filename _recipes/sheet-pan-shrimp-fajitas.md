@@ -2,6 +2,7 @@
 title: Sheet-Pan Shrimp Fajitas with Lime Crema
 date: 2026-08-01 06:00:02 -0400
 description: Shrimp and peppers roasted hard on one pan, then folded into warm tortillas with a quick lime crema.
+image: /assets/images/Sheet-Pan-Shrimp-Fajitas-With-Lime-Crema.webp
 servings: 4
 prep_time: 15 min
 cook_time: 20 min

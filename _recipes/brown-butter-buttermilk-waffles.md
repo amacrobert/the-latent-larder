@@ -2,6 +2,7 @@
 title: Crispy Buttermilk Waffles with Brown Butter
 date: 2026-08-01 01:00:03 -0400
 description: Crisp outside, tender within, from browned butter and whipped egg whites folded in at the last minute.
+image: /assets/images/Crispy-Buttermilk-Waffles-With-Brown-Butter.webp
 servings: 4
 prep_time: 10 min
 cook_time: 20 min
